@@ -9,8 +9,8 @@
     widget.style.right = '20px';
     widget.style.width = '300px';
     widget.style.height = '400px';
-    widget.style.backgroundColor = '#f0f0f0'; // Light gray background to see if it's there
-    widget.style.border = '2px solid black';  // Border to make it visible
+    widget.style.backgroundColor = '#f0f0f0';
+    widget.style.border = '2px solid black';
     widget.style.zIndex = '9999';
     document.body.appendChild(widget);
     console.log('Container created');
@@ -18,7 +18,7 @@
     // Add CSS with error checking
     var styles = document.createElement('link');
     styles.rel = 'stylesheet';
-    styles.href = 'https://leapthelimit.github.io/finlit-widget/static/css/main.8da595db.css';
+    styles.href = 'https://leapthelimit.github.io/finlit-widget/static/css/main.12c73e1d.css';  // Updated file name
     styles.onload = function() {
         console.log('CSS loaded successfully');
     };
@@ -29,7 +29,7 @@
 
     // Add React with error checking
     var script = document.createElement('script');
-    script.src = 'https://leapthelimit.github.io/finlit-widget/static/js/main.07479a87.js';
+    script.src = 'https://leapthelimit.github.io/finlit-widget/static/js/main.9dcff789.js';  // Updated file name
     script.async = true;
     script.onload = function() {
         console.log('React script loaded successfully');
