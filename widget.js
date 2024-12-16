@@ -1,6 +1,9 @@
 (function() {
     console.log('Widget script starting...');
 
+    // Fix base URL for all assets
+    var baseUrl = 'https://leapthelimit.github.io/finlit-widget';
+
     // First create container
     var widget = document.createElement('div');
     widget.id = 'root';
@@ -12,33 +15,15 @@
     widget.style.zIndex = '9999';
     document.body.appendChild(widget);
 
-    // Add meta tags
-    var meta1 = document.createElement('meta');
-    meta1.name = 'viewport';
-    meta1.content = 'width=device-width,initial-scale=1';
-    document.head.appendChild(meta1);
-
-    var meta2 = document.createElement('meta');
-    meta2.name = 'theme-color';
-    meta2.content = '#000000';
-    document.head.appendChild(meta2);
-
-    // Add favicon
-    var favicon = document.createElement('link');
-    favicon.rel = 'icon';
-    favicon.href = 'https://leapthelimit.github.io/finlit-widget/favicon.ico';
-    document.head.appendChild(favicon);
-
-    // Add manifest
-    var manifest = document.createElement('link');
-    manifest.rel = 'manifest';
-    manifest.href = 'https://leapthelimit.github.io/finlit-widget/manifest.json';
-    document.head.appendChild(manifest);
+    // Add base tag for relative URLs
+    var base = document.createElement('base');
+    base.href = baseUrl;
+    document.head.appendChild(base);
 
     // Add CSS
     var styles = document.createElement('link');
     styles.rel = 'stylesheet';
-    styles.href = 'https://leapthelimit.github.io/finlit-widget/static/css/main.12c73e1d.css';
+    styles.href = baseUrl + '/static/css/main.12c73e1d.css';
     document.head.appendChild(styles);
 
     // Add Montserrat font
@@ -47,16 +32,23 @@
     font.href = 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap';
     document.head.appendChild(font);
 
-    // Add all chunk scripts
+    // Add chunk script
     var chunkScript = document.createElement('script');
-    chunkScript.src = 'https://leapthelimit.github.io/finlit-widget/static/js/845.6f7862ba.chunk.js';
+    chunkScript.src = baseUrl + '/static/js/845.6f7862ba.chunk.js';
     document.body.appendChild(chunkScript);
 
-    // Add main script last
+    // Add main script with CORS headers
     var mainScript = document.createElement('script');
-    mainScript.src = 'https://leapthelimit.github.io/finlit-widget/static/js/main.9dcff789.js';
+    mainScript.src = baseUrl + '/static/js/main.9dcff789.js';
     mainScript.defer = true;
+    mainScript.crossOrigin = 'anonymous';
     document.body.appendChild(mainScript);
+
+    // Add CORS meta tag
+    var corsMeta = document.createElement('meta');
+    corsMeta.httpEquiv = 'Content-Security-Policy';
+    corsMeta.content = "default-src * 'unsafe-inline' 'unsafe-eval'; img-src * data: blob:;";
+    document.head.appendChild(corsMeta);
 
     console.log('Widget script finished initial setup');
 })();
