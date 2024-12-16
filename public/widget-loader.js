@@ -7,7 +7,7 @@
     // Load required styles
     const styles = document.createElement('link');
     styles.rel = 'stylesheet';
-    styles.href = 'https://abedqwasmi.github.io/finlit-wed/static/css/main.7d7d21e3.css';
+    styles.href = 'https://leapthelimit.github.io/finlit-widget/static/css/main.8da595db.css';
     document.head.appendChild(styles);
 
     // Load required fonts
@@ -18,7 +18,7 @@
 
     // Load widget script
     const script = document.createElement('script');
-    script.src = 'https://abedqwasmi.github.io/finlit-wed/static/js/main.96ea37cd.js';
+    script.src = 'https://leapthelimit.github.io/finlit-widget/static/js/main.07479a87.js';
     script.async = true;
     document.body.appendChild(script);
-})(); 
+})();
