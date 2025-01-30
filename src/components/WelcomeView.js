@@ -14,7 +14,7 @@ const WelcomeView = ({ setCurrentView }) => (
             <img
                 src={startIcon}
                 alt="loading"
-                className="h-32 w-auto"
+                className="h-40 w-auto"
             />
         </div>
 
