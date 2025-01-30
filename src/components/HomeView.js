@@ -7,16 +7,13 @@ import History from './History';
 const HomeView = ({ setCurrentView }) => (
     <div className="flex flex-col h-full justify-between">
         <Header setCurrentView={setCurrentView} path={'welcome'} />
-        
-        <div className="flex-1 overflow-y-auto px-4">
-            <h2 className="text-2xl font-medium mb-6 pt-4">How may I help you today!</h2>
+        <div className='flex-1 overflow-y-auto scrollbar-none py-4'>
+            <h2 className="text-xl font-medium mb-4 px-4">How may I help you today!</h2>
             <HomeButtons setCurrentView={setCurrentView} />
+            {/* History */}
             <History setCurrentView={setCurrentView} />
         </div>
-
-        <div className="p-4">
-            <PoweredBy />
-        </div>
+        <PoweredBy />
     </div>
 );
 

@@ -12,6 +12,9 @@
     widget.style.backgroundColor = '#f0f0f0'; // Light gray background to see if it's there
     widget.style.border = '2px solid black';  // Border to make it visible
     widget.style.zIndex = '9999';
+    widget.style.borderRadius = '16px';
+    widget.style.overflow = 'hidden';
+    widget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
     document.body.appendChild(widget);
     console.log('Container created');
 

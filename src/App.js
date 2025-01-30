@@ -50,17 +50,15 @@ const App = () => {
   };
 
   return (
-    <div className="fixed bottom-0 right-0 m-4 md:relative md:m-0">
-        <button
-            onClick={toggleMobileView}
-            className="absolute -top-16 right-0 z-20"
-        >
-            <img src={!isOpen ? closeIcon : showIcon} alt='toggle widget' className='w-12' />
-        </button>
-        
-        <MobileView isOpen={isOpen}>
-            {renderCurrentView()}
-        </MobileView>
+    <div className="text-white">
+      <button
+        onClick={toggleMobileView}
+        className="fixed bottom-4 right-4 z-50">
+        <img src={!isOpen ? closeIcon : showIcon} alt='toggle-widget' className='w-12 h-12' />
+      </button>
+      <MobileView isOpen={isOpen}>
+        {renderCurrentView()}
+      </MobileView>
     </div>
   );
 };
