@@ -8,7 +8,7 @@
     widget.style.bottom = '20px';
     widget.style.right = '20px';
     widget.style.width = '300px';
-    widget.style.height = '480px';  // 400px + 20%
+    widget.style.height = '528px';  // 480px + 10%
     widget.style.backgroundColor = '#f0f0f0'; // Light gray background to see if it's there
     widget.style.border = '2px solid black';  // Border to make it visible
     widget.style.zIndex = '9999';
