@@ -206,10 +206,31 @@ const VoiceChat = ({ setCurrentView }) => {
                     >
                         {speaking ? <AudioLines size={30} /> : <MicIcon size={30} />}
                     </button>
-                    <div className="flex space-x-4">
-                        <button className="p-2 rounded-full bg-[#272626]">
-                            <Globe />
+                    <div className="relative">
+                        <button 
+                            onClick={toggleLanguages} 
+                            className="p-2 rounded-full bg-[#272626]"
+                        >
+                            <Globe size={24} />
                         </button>
+                        {showLanguages && (
+                            <div className="absolute bottom-full right-1 mb-2 flex flex-col space-y-2">
+                                {['עב', 'عر', 'EN'].map((lang) => (
+                                    <button
+                                        key={lang}
+                                        onClick={() => {
+                                            setSelectedLanguage(lang);
+                                            setShowLanguages(false);
+                                        }}
+                                        className={`p-2 rounded-full text-xs flex items-center justify-center ${
+                                            selectedLanguage === lang ? 'bg-purple-600' : 'bg-[#272626]'
+                                        }`}
+                                    >
+                                        {lang}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
