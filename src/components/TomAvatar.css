@@ -8,51 +8,52 @@
 }
 
 .tom {
-  width: 140px;
-  height: 140px;
+  width: 120px;
+  height: 120px;
   position: relative;
 }
 
 .tom .face {
-  width: 140px;
-  height: 140px;
+  width: 120px;
+  height: 120px;
   background: #424B54;
   border-radius: 50%;
   position: relative;
+  overflow: hidden; /* This will keep whiskers inside */
 }
 
 /* Ears */
 .tom .ear {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   background: #424B54;
   position: absolute;
-  top: -5px;
+  top: -2px;
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 }
 
 .tom .ear.left {
-  left: 20px;
-  transform: rotate(-20deg);
+  left: 15px;
+  transform: rotate(-15deg);
 }
 
 .tom .ear.right {
-  right: 20px;
-  transform: rotate(20deg);
+  right: 15px;
+  transform: rotate(15deg);
 }
 
 /* Eyes */
 .tom .eyes {
   position: relative;
-  top: 45px;
+  top: 35px;
   display: flex;
   justify-content: space-around;
-  padding: 0 20px;
+  padding: 0 15px;
 }
 
 .tom .eye {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   background: white;
   border-radius: 50%;
   position: relative;
@@ -60,8 +61,8 @@
 
 .tom .eye:before {
   content: '';
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   background: #FFB974;
   border-radius: 50%;
   position: absolute;
@@ -71,56 +72,56 @@
 
 .tom .eye:after {
   content: '';
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   background: black;
   border-radius: 50%;
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 9px;
+  left: 9px;
 }
 
 /* Nose */
 .tom .nose {
-  width: 12px;
-  height: 8px;
+  width: 10px;
+  height: 6px;
   background: black;
   border-radius: 50%;
   position: absolute;
-  top: 85px;
+  top: 70px;
   left: 50%;
   transform: translateX(-50%);
 }
 
 /* Mouth */
 .tom .mouth {
-  width: 60px;
-  height: 30px;
+  width: 40px;
+  height: 20px;
   border: none;
-  border-bottom: 3px solid black;
+  border-bottom: 2px solid black;
   border-radius: 50%;
   position: absolute;
-  bottom: 35px;
+  bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
 }
 
 /* Blush */
 .tom .blush {
-  width: 20px;
-  height: 10px;
+  width: 15px;
+  height: 8px;
   background: rgba(255, 192, 203, 0.6);
   border-radius: 50%;
   position: absolute;
-  top: 95px;
+  top: 75px;
 }
 
 .tom .blush.left {
-  left: 25px;
+  left: 20px;
 }
 
 .tom .blush.right {
-  right: 25px;
+  right: 20px;
 }
 
 /* Whiskers */
