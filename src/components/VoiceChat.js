@@ -37,12 +37,12 @@ const VoiceChat = ({ setCurrentView }) => {
                     audioInstanceRef.current.pause();
                     audioInstanceRef.current = null;
                 }
-                setSpeaking(true);
+                setIsListening(true);
+                setSpeaking(false);
                 setBotResponse('Listening...');
                 document.querySelectorAll('.circle').forEach(circle => {
                     circle.classList.add('circle-listening');
                 });
-                setIsListening(true);
             };
 
             recognition.onerror = (event) => {
@@ -56,12 +56,12 @@ const VoiceChat = ({ setCurrentView }) => {
             };
 
             recognition.onend = () => {
+                setIsListening(false);
+                setSpeaking(false);
                 setBotResponse('Generating...');
                 document.querySelectorAll('.circle').forEach(circle => {
                     circle.classList.remove('circle-listening');
                 });
-                setSpeaking(false);
-                setIsListening(false);
             };
 
             recognition.onresult = async (event) => {
@@ -126,12 +126,12 @@ const VoiceChat = ({ setCurrentView }) => {
             const getVoiceForAvatar = () => {
                 switch(currentAvatar) {
                     case 'robot':
-                        return 'en-US-Neural2-D'; // More robotic male voice
+                        return 'en-US-Standard-B'; // More robotic male voice
                     case 'cat':
-                        return 'en-US-Neural2-C'; // Higher pitched female voice
+                        return 'en-US-Standard-E'; // Higher pitched female voice
                     case 'fox':
                     default:
-                        return 'en-US-Neural2-F'; // Friendly female voice
+                        return 'en-US-Standard-C'; // Neutral female voice
                 }
             };
 
@@ -141,7 +141,10 @@ const VoiceChat = ({ setCurrentView }) => {
                 body: JSON.stringify({ 
                     text: botReply, 
                     language_code: getLanguageCode(),
-                    voice_name: getVoiceForAvatar()
+                    voice_name: getVoiceForAvatar(),
+                    speaking_rate: currentAvatar === 'robot' ? 0.9 : 1.0,
+                    pitch: currentAvatar === 'robot' ? 0.5 : 
+                           currentAvatar === 'cat' ? 1.2 : 1.0
                 })
             });
             const ttsData = await ttsResponse.json();
@@ -157,16 +160,20 @@ const VoiceChat = ({ setCurrentView }) => {
             
             audioInstanceRef.current.onplay = () => {
                 setAudioPlaying(true);
+                setSpeaking(true);
             };
             
             audioInstanceRef.current.onended = () => {
                 setAudioPlaying(false);
+                setSpeaking(false);
             };
             
             audioInstanceRef.current.play();
         } catch (error) {
-            console.error('Error handling user message:', error);
+            console.error('Error:', error);
             setBotResponse('Error occurred while processing your message.');
+            setSpeaking(false);
+            setAudioPlaying(false);
         }
     }, [getLanguageCode, serverUrl, currentAvatar]);
 
@@ -181,6 +188,18 @@ const VoiceChat = ({ setCurrentView }) => {
             return () => clearTimeout(timer);
         }
     }, [currentWordIndex, responseWords, handleUserMessage, wordsPerBatch, responseUpdateInterval]);
+
+    // Add effect to handle avatar changes
+    useEffect(() => {
+        // Stop current audio when avatar changes
+        if (audioInstanceRef.current) {
+            audioInstanceRef.current.pause();
+            audioInstanceRef.current = null;
+        }
+        setAudioPlaying(false);
+        setSpeaking(false);
+        setBotResponse('What do you know about Finance?');
+    }, [currentAvatar]);
 
     const renderAvatar = () => {
         switch(currentAvatar) {
