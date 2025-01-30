@@ -130,21 +130,24 @@ const ChatMessages = ({ pastConversation = [], setCurrentView, isHistory = false
     };
 
     return (
-        <div className="flex flex-col md:h-full h-full bg-black text-white items-center">
-            {/* Show header when in past conversation view */}
+        <div className="flex flex-col h-full bg-black text-white">
             {isHistory && <Header setCurrentView={setCurrentView} />}
             <div className='mb-3'>
                 <PoweredBy />
             </div>
-            <div className="overflow-y-auto scrollbar-none w-full h-[450px] md:h-[450px]">
-                {/* Show suggestions only if there are no messages yet */}
+            
+            {/* Main chat container with proper spacing */}
+            <div className="flex-1 overflow-y-auto scrollbar-none w-full relative pb-16"> {/* Added pb-16 for input bar space */}
+                {/* Suggestions section */}
                 {showSuggestions && messages.length === 0 && (
                     <div className="p-4">
-                        <h3 className="text-lg font-bold mb-2">Suggestions:</h3>
+                        <h3 className="text-lg font-medium mb-2">Suggestions:</h3>
                         <PromptSuggestions onSelectPrompt={handleSuggestionClick} />
                     </div>
                 )}
-                <div className="space-y-2 overflow-y-auto scrollbar-none h-[450px] md:h-[450px] md:pb-4 relative z-[10]">
+                
+                {/* Messages section */}
+                <div className="space-y-2 px-4">
                     {messages.map((message, index) => (
                         <div key={index} className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
                             {message.sender === 'Finlix' && (
@@ -152,20 +155,25 @@ const ChatMessages = ({ pastConversation = [], setCurrentView, isHistory = false
                                     <img src={startIcon} alt='startIcon' />
                                 </div>
                             )}
-                            <div className={`rounded-lg px-3 py-2 max-w-[75%] font-medium ${message.sender === 'user' ? 'bg-[#C736D9] text-white rounded-br-none' : 'bg-[#E9E9EB] text-black my-1 rounded-bl-none'
-                                }`}>
+                            <div className={`rounded-lg px-3 py-2 max-w-[75%] font-medium ${
+                                message.sender === 'user' 
+                                    ? 'bg-[#C736D9] text-white rounded-br-none' 
+                                    : 'bg-[#E9E9EB] text-black my-1 rounded-bl-none'
+                            }`}>
                                 <p className="text-sm">{message.text}</p>
                             </div>
                         </div>
                     ))}
-                    <div ref={messagesEndRef} className='h-[50px]' />
+                    <div ref={messagesEndRef} />
                 </div>
             </div>
-            <div className="fixed z-20 md:relative bottom-[130px] md:bottom-0 left-0 right-0 w-[85%] md:w-full mx-auto flex items-center bg-white rounded-xl p-1">
-                <div className="flex-1 flex items-center">
+
+            {/* Input bar fixed at bottom */}
+            <div className="absolute bottom-4 left-0 right-0 px-4">
+                <div className="bg-white rounded-xl p-1 flex items-center">
                     <button className="p-2" onClick={startSpeechRecognition}>
                         {listening ? (
-                            <Mic color='#C736D9' />  // Change color while listening
+                            <Mic color='#C736D9' />
                         ) : (
                             <Mic color='#828282' />
                         )}
@@ -178,12 +186,12 @@ const ChatMessages = ({ pastConversation = [], setCurrentView, isHistory = false
                         placeholder="Message..."
                         className="bg-transparent outline-none p-1 text-[#828282] text-sm flex-1"
                     />
+                    {inputMessage.trim() && (
+                        <button className="bg-black rounded-full p-1" onClick={handleSend}>
+                            <ArrowUp />
+                        </button>
+                    )}
                 </div>
-                {inputMessage.trim() && (
-                    <button className="bg-black rounded-full p-1" onClick={handleSend}>
-                        <ArrowUp />
-                    </button>
-                )}
             </div>
         </div>
     );
