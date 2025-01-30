@@ -210,7 +210,7 @@
 }
 
 .talking-animal {
-  animation: talk 0.2s infinite alternate;
+  animation: mouth-movement 0.2s infinite;
 }
 
 /* Blinking Animation */
@@ -222,6 +222,21 @@
 }
 
 .animal-eye {
-  animation: blink 4s infinite;
+  animation: blink 4s infinite ease-in-out;
+}
+
+/* Add these animations */
+@keyframes mouth-movement {
+    0% { transform: scaleY(1); }
+    50% { transform: scaleY(0.7); }
+    100% { transform: scaleY(1); }
+}
+
+.talking-animal {
+    animation: mouth-movement 0.2s infinite;
+}
+
+.animal-eye {
+    animation: blink 4s infinite ease-in-out;
 }
 

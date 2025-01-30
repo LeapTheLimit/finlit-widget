@@ -16,6 +16,7 @@ const VoiceChat = ({ setCurrentView }) => {
     const serverUrl = 'https://leapthelimit-1057493174729.me-west1.run.app'; 
     const wordsPerBatch = 7;  
     const responseUpdateInterval = 2500;  
+    const [audioPlaying, setAudioPlaying] = useState(false);
 
     // Set up speech recognition (webkitSpeechRecognition for Chrome)
     useEffect(() => {
@@ -129,6 +130,13 @@ const VoiceChat = ({ setCurrentView }) => {
             }
             audioInstanceRef.current = new Audio(`data:audio/mp3;base64,${audioContent}`);
             audioInstanceRef.current.play();
+            setAudioPlaying(true);
+
+            audioInstanceRef.current.onended = () => {
+                setAudioPlaying(false);
+                setResponseWords([]);
+                setCurrentWordIndex(0);
+            };
         } catch (error) {
             console.error('Error handling user message:', error);
             setBotResponse('Error occurred while processing your message.');
@@ -152,7 +160,7 @@ const VoiceChat = ({ setCurrentView }) => {
             <Header setCurrentView={setCurrentView} />
             <div className="bg-black h-full w-full flex flex-col items-center justify-start text-white relative overflow-hidden">
                 <div className='h-[50%] w-full flex justify-center items-center'>
-                    <TalkingAnimal isSpeaking={speaking} />
+                    <TalkingAnimal isSpeaking={speaking || audioPlaying} />
                 </div>
 
                 <div className='h-[40%] flex items-center justify-center'>

@@ -16,13 +16,13 @@ const TalkingAnimal = ({ isSpeaking }) => {
     <div className="relative w-64 h-64">
       {/* Main animal body */}
       <div className="absolute inset-0">
-        <svg viewBox="0 0 200 200">
+        <svg viewBox="0 0 200 200" className="transition-all duration-300">
           {/* Head */}
           <circle cx="100" cy="100" r="80" fill="#FFD700" />
           
           {/* Eyes */}
-          <circle cx="70" cy="70" r="15" fill="#333" />
-          <circle cx="130" cy="70" r="15" fill="#333" />
+          <circle cx="70" cy="70" r="15" fill="#333" className="animal-eye" />
+          <circle cx="130" cy="70" r="15" fill="#333" className="animal-eye" />
           
           {/* Animated Mouth */}
           <path 
@@ -30,7 +30,7 @@ const TalkingAnimal = ({ isSpeaking }) => {
             stroke="#333" 
             strokeWidth="8" 
             fill="none"
-            className="transition-all duration-300"
+            className={`transition-all duration-300 ${isSpeaking ? 'talking-animal' : ''}`}
           />
         </svg>
       </div>
