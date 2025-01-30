@@ -6,144 +6,165 @@
   transition: all 100ms ease-in;
 }
 
-.fox-container {
-  width: 120px;  /* Smaller size */
-  height: 120px;
+.fox-wrapper {
   position: relative;
+  height: 120px;
+  width: 120px;
+  transform: scale(0.5);
 }
 
 .fox {
-  width: 100%;
-  height: 100%;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/* Main fox head */
-.fox .head {
-  width: 100px;
+  width: 120px;
   height: 100px;
+  z-index: 21;
+}
+
+/* Head */
+.fox__head {
+  position: absolute;
+  width: 108px;
+  height: 80px;
   background: #C736D9;
-  border-radius: 50% 50% 60% 60%;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-}
-
-/* White face mask */
-.fox .head:before {
-  content: '';
-  width: 80px;
-  height: 60px;
-  background: white;
-  position: absolute;
-  bottom: 0;
-  left: 10px;
-  border-radius: 40px 40px 30px 30px;
-}
-
-/* Eyes */
-.fox .eye {
-  width: 8px;
-  height: 12px;
-  background: black;
-  position: absolute;
-  top: 45px;
-  border-radius: 50%;
+  border-radius: 50% 50% 45% 45%;
+  left: 6px;
   z-index: 2;
-  animation: blink 4s infinite;
-}
-
-.fox .eye:first-child {
-  left: 30px;
-}
-
-.fox .eye:last-child {
-  right: 30px;
-}
-
-/* Nose */
-.fox .nose {
-  width: 12px;
-  height: 8px;
-  background: black;
-  position: absolute;
-  bottom: 30px;
-  left: 44px;
-  border-radius: 50%;
-  z-index: 2;
-}
-
-/* Mouth - made visible and animated */
-.fox .mouth {
-  width: 20px;
-  height: 3px;
-  background: black;
-  position: absolute;
-  bottom: 20px;
-  left: 40px;
-  border-radius: 10px;
-  z-index: 2;
-  transform-origin: center;
-}
-
-/* Talking animation */
-.fox.talking .mouth {
-  animation: talk 0.2s infinite alternate;
-}
-
-@keyframes talk {
-  0% { 
-    height: 3px;
-    transform: scaleY(1);
-  }
-  100% { 
-    height: 10px;
-    transform: scaleY(1.5);
-  }
-}
-
-@keyframes blink {
-  0%, 96%, 98% { transform: scaleY(1); }
-  97% { transform: scaleY(0.1); }
 }
 
 /* Ears */
-.fox .ear {
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-bottom: 30px solid #C736D9;
+.fox__ear {
   position: absolute;
-  top: -10px;
+  height: 45px;
+  width: 28px;
+  top: -15px;
+  background-color: #C736D9;
+  z-index: 1;
 }
 
-.fox .ear:first-child {
-  left: 10px;
-  transform: rotate(-20deg);
+.fox__ear--left {
+  border-radius: 10px 80px 0 0;
+  left: 12px;
+  transform: rotate(-5deg);
+  transform-origin: bottom;
 }
 
-.fox .ear:last-child {
-  right: 10px;
-  transform: rotate(20deg);
+.fox__ear--right {
+  border-radius: 80px 10px 0 0;
+  right: 12px;
+  transform: rotate(5deg);
+  transform-origin: bottom;
 }
 
-/* Ear animation during talking */
-.fox.talking .ear:first-child {
-  animation: leftEarTwitch 0.3s infinite alternate;
+/* Eyes */
+.fox__eye {
+  position: absolute;
+  height: 12px;
+  width: 12px;
+  top: 40px;
+  border-radius: 50%;
+  background-color: #000;
+  z-index: 5;
+  animation: fox-blink 4s linear infinite;
 }
 
-.fox.talking .ear:last-child {
-  animation: rightEarTwitch 0.3s infinite alternate;
+.fox__eye--left {
+  left: 30px;
 }
 
-@keyframes leftEarTwitch {
-  100% { transform: rotate(-25deg); }
+.fox__eye--right {
+  right: 30px;
 }
 
-@keyframes rightEarTwitch {
-  100% { transform: rotate(25deg); }
+/* White face parts */
+.fox__cheek {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  background-color: white;
+  top: 35px;
+  z-index: 3;
+}
+
+.fox__cheek--left {
+  left: 5px;
+  transform: rotate(-15deg);
+  border-radius: 0 30px 0 30px;
+}
+
+.fox__cheek--right {
+  right: 5px;
+  transform: rotate(15deg);
+  border-radius: 30px 0 30px 0;
+}
+
+/* Nose */
+.fox__nose {
+  position: absolute;
+  top: 58px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #000;
+  z-index: 4;
+}
+
+/* Mouth */
+.fox__mouth {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 3px;
+  background-color: #000;
+  border-radius: 3px;
+  z-index: 4;
+}
+
+/* Animations */
+@keyframes fox-blink {
+  0%, 96%, 98% {
+    transform: scaleY(1);
+  }
+  97% {
+    transform: scaleY(0.1);
+  }
+}
+
+/* Talking animations */
+.fox.talking .fox__mouth {
+  animation: fox-talk 0.2s infinite alternate;
+}
+
+.fox.talking .fox__ear--left {
+  animation: ear-left 0.3s infinite alternate;
+}
+
+.fox.talking .fox__ear--right {
+  animation: ear-right 0.3s infinite alternate;
+}
+
+@keyframes fox-talk {
+  0% {
+    height: 3px;
+    border-radius: 3px;
+  }
+  100% {
+    height: 8px;
+    border-radius: 6px;
+  }
+}
+
+@keyframes ear-left {
+  to {
+    transform: rotate(-10deg);
+  }
+}
+
+@keyframes ear-right {
+  to {
+    transform: rotate(10deg);
+  }
 } 

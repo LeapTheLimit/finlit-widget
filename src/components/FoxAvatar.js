@@ -3,16 +3,17 @@ import './FoxAvatar.css';
 
 const FoxAvatar = ({ isSpeaking }) => {
   return (
-    <div className="fox-container">
+    <div className="fox-wrapper">
       <div className={`fox ${isSpeaking ? 'talking' : ''}`}>
-        <div className="head">
-          <div className="ear"></div>
-          <div className="ear"></div>
-          <div className="eye"></div>
-          <div className="eye"></div>
-          <div className="nose"></div>
-          <div className="mouth"></div>
-        </div>
+        <div className="fox__ear fox__ear--left"></div>
+        <div className="fox__ear fox__ear--right"></div>
+        <div className="fox__head"></div>
+        <div className="fox__eye fox__eye--left"></div>
+        <div className="fox__eye fox__eye--right"></div>
+        <div className="fox__nose"></div>
+        <div className="fox__mouth"></div>
+        <div className="fox__cheek fox__cheek--left"></div>
+        <div className="fox__cheek fox__cheek--right"></div>
       </div>
     </div>
   );
