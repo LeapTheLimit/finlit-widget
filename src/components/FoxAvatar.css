@@ -8,49 +8,49 @@
 
 .fox-wrapper {
   position: relative;
-  height: 120px;
-  width: 120px;
-  transform: scale(0.5);
+  height: 180px;
+  width: 180px;
+  transform: scale(0.8);
 }
 
 .fox {
   position: absolute;
-  width: 120px;
-  height: 100px;
+  width: 180px;
+  height: 150px;
   z-index: 21;
 }
 
 /* Head */
 .fox__head {
   position: absolute;
-  width: 108px;
-  height: 80px;
+  width: 162px;
+  height: 120px;
   background: #C736D9;
   border-radius: 50% 50% 45% 45%;
-  left: 6px;
+  left: 9px;
   z-index: 2;
 }
 
 /* Ears */
 .fox__ear {
   position: absolute;
-  height: 45px;
-  width: 28px;
-  top: -15px;
+  height: 68px;
+  width: 42px;
+  top: -22px;
   background-color: #C736D9;
   z-index: 1;
 }
 
 .fox__ear--left {
   border-radius: 10px 80px 0 0;
-  left: 12px;
+  left: 18px;
   transform: rotate(-5deg);
   transform-origin: bottom;
 }
 
 .fox__ear--right {
   border-radius: 80px 10px 0 0;
-  right: 12px;
+  right: 18px;
   transform: rotate(5deg);
   transform-origin: bottom;
 }
@@ -58,9 +58,9 @@
 /* Eyes */
 .fox__eye {
   position: absolute;
-  height: 12px;
-  width: 12px;
-  top: 40px;
+  height: 18px;
+  width: 18px;
+  top: 60px;
   border-radius: 50%;
   background-color: #000;
   z-index: 5;
@@ -68,20 +68,20 @@
 }
 
 .fox__eye--left {
-  left: 30px;
+  left: 45px;
 }
 
 .fox__eye--right {
-  right: 30px;
+  right: 45px;
 }
 
 /* White face parts */
 .fox__cheek {
   position: absolute;
-  width: 45px;
-  height: 45px;
+  width: 68px;
+  height: 68px;
   background-color: white;
-  top: 35px;
+  top: 53px;
   z-index: 3;
 }
 
@@ -100,11 +100,11 @@
 /* Nose */
 .fox__nose {
   position: absolute;
-  top: 58px;
+  top: 87px;
   left: 50%;
   transform: translateX(-50%);
-  width: 12px;
-  height: 8px;
+  width: 18px;
+  height: 12px;
   border-radius: 50%;
   background-color: #000;
   z-index: 4;
@@ -113,11 +113,11 @@
 /* Mouth */
 .fox__mouth {
   position: absolute;
-  top: 70px;
+  top: 105px;
   left: 50%;
   transform: translateX(-50%);
-  width: 16px;
-  height: 3px;
+  width: 24px;
+  height: 4px;
   background-color: #000;
   border-radius: 3px;
   z-index: 4;
