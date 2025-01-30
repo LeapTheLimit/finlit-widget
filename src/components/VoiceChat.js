@@ -129,14 +129,16 @@ const VoiceChat = ({ setCurrentView }) => {
                 audioInstanceRef.current.pause();
             }
             audioInstanceRef.current = new Audio(`data:audio/mp3;base64,${audioContent}`);
-            audioInstanceRef.current.play();
-            setAudioPlaying(true);
-
+            
+            audioInstanceRef.current.onplay = () => {
+                setAudioPlaying(true);
+            };
+            
             audioInstanceRef.current.onended = () => {
                 setAudioPlaying(false);
-                setResponseWords([]);
-                setCurrentWordIndex(0);
             };
+            
+            audioInstanceRef.current.play();
         } catch (error) {
             console.error('Error handling user message:', error);
             setBotResponse('Error occurred while processing your message.');
