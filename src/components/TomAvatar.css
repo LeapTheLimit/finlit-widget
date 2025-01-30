@@ -13,133 +13,137 @@
   position: relative;
 }
 
-/* Head */
-.tom .head {
-  width: 120px;
-  height: 120px;
-  background: #a8a8a8;
+.tom .face {
+  width: 140px;
+  height: 140px;
+  background: #424B54;
   border-radius: 50%;
   position: relative;
-  overflow: hidden;
-}
-
-.tom .face {
-  width: 100px;
-  height: 100px;
-  background: #d6d6d6;
-  border-radius: 45%;
-  position: absolute;
-  top: 15px;
-  left: 10px;
 }
 
 /* Ears */
 .tom .ear {
-  width: 35px;
-  height: 45px;
-  background: #a8a8a8;
+  width: 30px;
+  height: 30px;
+  background: #424B54;
   position: absolute;
-  top: -15px;
-  border-radius: 50% 50% 0 0;
+  top: -5px;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 }
 
 .tom .ear.left {
-  left: 15px;
-  transform: rotate(-10deg);
-  transform-origin: bottom;
+  left: 20px;
+  transform: rotate(-20deg);
 }
 
 .tom .ear.right {
-  right: 15px;
-  transform: rotate(10deg);
-  transform-origin: bottom;
+  right: 20px;
+  transform: rotate(20deg);
 }
 
 /* Eyes */
 .tom .eyes {
   position: relative;
-  top: 30px;
+  top: 45px;
   display: flex;
   justify-content: space-around;
-  padding: 0 10px;
+  padding: 0 20px;
 }
 
 .tom .eye {
-  width: 24px;
-  height: 28px;
-  background: #ffeb3b;
+  width: 32px;
+  height: 32px;
+  background: white;
   border-radius: 50%;
   position: relative;
-  overflow: hidden;
 }
 
 .tom .eye:before {
   content: '';
-  width: 12px;
-  height: 12px;
-  background: #000;
+  width: 24px;
+  height: 24px;
+  background: #FFB974;
   border-radius: 50%;
   position: absolute;
-  top: 8px;
-  left: 6px;
+  top: 4px;
+  left: 4px;
+}
+
+.tom .eye:after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background: black;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  left: 10px;
 }
 
 /* Nose */
 .tom .nose {
-  width: 18px;
-  height: 12px;
-  background: #ff9e9e;
+  width: 12px;
+  height: 8px;
+  background: black;
   border-radius: 50%;
   position: absolute;
-  top: 65px;
+  top: 85px;
   left: 50%;
   transform: translateX(-50%);
 }
 
 /* Mouth */
-.tom .mouth-container {
-  width: 30px;
-  height: 20px;
+.tom .mouth {
+  width: 60px;
+  height: 30px;
+  border: none;
+  border-bottom: 3px solid black;
+  border-radius: 50%;
   position: absolute;
-  top: 80px;
+  bottom: 35px;
   left: 50%;
   transform: translateX(-50%);
-  overflow: hidden;
 }
 
-.tom .mouth {
+/* Blush */
+.tom .blush {
   width: 20px;
   height: 10px;
-  border: 3px solid #000;
-  border-radius: 0 0 20px 20px;
+  background: rgba(255, 192, 203, 0.6);
+  border-radius: 50%;
   position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 95px;
+}
+
+.tom .blush.left {
+  left: 25px;
+}
+
+.tom .blush.right {
+  right: 25px;
 }
 
 /* Whiskers */
 .tom .whiskers {
   position: absolute;
-  top: 70px;
-  width: 40px;
+  top: 85px;
+  width: 30px;
   height: 30px;
 }
 
 .tom .whiskers.left {
-  left: -30px;
+  left: -25px;
 }
 
 .tom .whiskers.right {
-  right: -30px;
+  right: -25px;
 }
 
 .tom .whisker {
-  width: 35px;
-  height: 2px;
-  background: #a8a8a8;
-  margin: 8px 0;
-  border-radius: 2px;
+  width: 25px;
+  height: 1px;
+  background: #666;
+  margin: 6px 0;
 }
 
 .tom .whiskers.left .whisker {
@@ -160,52 +164,30 @@
 
 /* Animations */
 .tom.talking .mouth {
-  animation: tom-talk 0.2s infinite alternate;
+  animation: cat-talk 0.3s infinite alternate;
+}
+
+@keyframes cat-talk {
+  0% {
+    height: 30px;
+    bottom: 35px;
+  }
+  100% {
+    height: 25px;
+    bottom: 40px;
+  }
 }
 
 .tom.talking .eye {
-  animation: tom-blink 4s infinite;
+  animation: cat-blink 4s infinite;
 }
 
-.tom.talking .ear.left {
-  animation: tom-ear-left 0.3s infinite alternate;
-}
-
-.tom.talking .ear.right {
-  animation: tom-ear-right 0.3s infinite alternate;
-}
-
-@keyframes tom-talk {
-  0% {
-    height: 10px;
-    border-radius: 0 0 20px 20px;
-  }
-  100% {
-    height: 15px;
-    border-radius: 0 0 25px 25px;
-  }
-}
-
-@keyframes tom-blink {
+@keyframes cat-blink {
   0%, 96%, 98% {
     transform: scaleY(1);
-    height: 28px;
   }
   97% {
     transform: scaleY(0.1);
-    height: 2px;
-  }
-}
-
-@keyframes tom-ear-left {
-  to {
-    transform: rotate(-15deg);
-  }
-}
-
-@keyframes tom-ear-right {
-  to {
-    transform: rotate(15deg);
   }
 }
 
@@ -228,4 +210,5 @@
   50% {
     transform: rotate(15deg);
   }
+} 
 } 
