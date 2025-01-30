@@ -240,3 +240,10 @@
     animation: blink 4s infinite ease-in-out;
 }
 
+@keyframes blink {
+    0% { transform: scaleY(1); }
+    90% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); }
+    100% { transform: scaleY(1); }
+}
+

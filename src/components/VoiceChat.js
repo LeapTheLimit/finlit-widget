@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { AudioLines, Globe, Keyboard, MicIcon } from 'lucide-react';
 import Header from './Header';
 import micBg from '../assets/images/circleDiv.svg';
-import TalkingAnimal from './TalkingAnimal';
+import FoxAvatar from './FoxAvatar';
 
 const VoiceChat = ({ setCurrentView }) => {
     const [speaking, setSpeaking] = useState(false);
@@ -162,7 +162,7 @@ const VoiceChat = ({ setCurrentView }) => {
             <Header setCurrentView={setCurrentView} />
             <div className="bg-black h-full w-full flex flex-col items-center justify-start text-white relative overflow-hidden">
                 <div className='h-[50%] w-full flex justify-center items-center'>
-                    <TalkingAnimal isSpeaking={speaking || audioPlaying} />
+                    <FoxAvatar isSpeaking={speaking || audioPlaying} />
                 </div>
 
                 <div className='h-[40%] flex items-center justify-center'>
