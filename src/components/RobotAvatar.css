@@ -174,4 +174,37 @@
   50% {
     transform: scale(1.1);
   }
+}
+
+/* Add these animations */
+.robot-container.listening .antenna {
+  animation: antenna-pulse 1s infinite;
+}
+
+.robot-container.listening .antenna.left {
+  animation-delay: 0.5s;
+}
+
+@keyframes antenna-pulse {
+  0% { transform: scaleY(1); }
+  50% { transform: scaleY(1.2); }
+  100% { transform: scaleY(1); }
+}
+
+/* Only animate mouth during talking */
+.robot-container.talking .mouth {
+  animation: robot-talk 0.3s infinite alternate;
+}
+
+.robot-container.listening .antenna:before {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
 } 

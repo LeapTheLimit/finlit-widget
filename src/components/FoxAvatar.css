@@ -167,4 +167,24 @@
   to {
     transform: rotate(10deg);
   }
+}
+
+/* Add listening animations */
+.fox-container.listening .ear {
+  animation: ear-twitch 1s infinite;
+}
+
+.fox-container.listening .ear.right {
+  animation-delay: 0.5s;
+}
+
+@keyframes ear-twitch {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(-15deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Only move mouth during talking */
+.fox-container.talking .mouth {
+  animation: fox-talk 0.3s infinite alternate;
 } 

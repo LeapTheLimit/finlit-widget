@@ -21,6 +21,7 @@ const VoiceChat = ({ setCurrentView }) => {
     const responseUpdateInterval = 2500;  
     const [audioPlaying, setAudioPlaying] = useState(false);
     const [currentAvatar, setCurrentAvatar] = useState('fox');
+    const [isListening, setIsListening] = useState(false);
 
     // Set up speech recognition (webkitSpeechRecognition for Chrome)
     useEffect(() => {
@@ -41,6 +42,7 @@ const VoiceChat = ({ setCurrentView }) => {
                 document.querySelectorAll('.circle').forEach(circle => {
                     circle.classList.add('circle-listening');
                 });
+                setIsListening(true);
             };
 
             recognition.onerror = (event) => {
@@ -50,6 +52,7 @@ const VoiceChat = ({ setCurrentView }) => {
                     circle.classList.remove('circle-listening');
                 });
                 setSpeaking(false);
+                setIsListening(false);
             };
 
             recognition.onend = () => {
@@ -58,6 +61,7 @@ const VoiceChat = ({ setCurrentView }) => {
                     circle.classList.remove('circle-listening');
                 });
                 setSpeaking(false);
+                setIsListening(false);
             };
 
             recognition.onresult = async (event) => {
@@ -118,10 +122,27 @@ const VoiceChat = ({ setCurrentView }) => {
                 })
             });
 
+            // Get voice based on avatar
+            const getVoiceForAvatar = () => {
+                switch(currentAvatar) {
+                    case 'robot':
+                        return 'en-US-Neural2-D'; // More robotic male voice
+                    case 'cat':
+                        return 'en-US-Neural2-C'; // Higher pitched female voice
+                    case 'fox':
+                    default:
+                        return 'en-US-Neural2-F'; // Friendly female voice
+                }
+            };
+
             const ttsResponse = await fetch(`${serverUrl}/synthesize`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ text: botReply, language_code: getLanguageCode() })
+                body: JSON.stringify({ 
+                    text: botReply, 
+                    language_code: getLanguageCode(),
+                    voice_name: getVoiceForAvatar()
+                })
             });
             const ttsData = await ttsResponse.json();
             const audioContent = ttsData.audioContent;
@@ -147,7 +168,7 @@ const VoiceChat = ({ setCurrentView }) => {
             console.error('Error handling user message:', error);
             setBotResponse('Error occurred while processing your message.');
         }
-    }, [getLanguageCode, serverUrl]);
+    }, [getLanguageCode, serverUrl, currentAvatar]);
 
     useEffect(() => {
         if (responseWords.length > 0 && currentWordIndex < responseWords.length) {
@@ -164,12 +185,21 @@ const VoiceChat = ({ setCurrentView }) => {
     const renderAvatar = () => {
         switch(currentAvatar) {
             case 'robot':
-                return <RobotAvatar isSpeaking={speaking || audioPlaying} />;
+                return <RobotAvatar 
+                    isSpeaking={speaking || audioPlaying} 
+                    isListening={isListening}
+                />;
             case 'cat':
-                return <CatAvatar isSpeaking={speaking || audioPlaying} />;
+                return <CatAvatar 
+                    isSpeaking={speaking || audioPlaying} 
+                    isListening={isListening}
+                />;
             case 'fox':
             default:
-                return <FoxAvatar isSpeaking={speaking || audioPlaying} />;
+                return <FoxAvatar 
+                    isSpeaking={speaking || audioPlaying} 
+                    isListening={isListening}
+                />;
         }
     };
 

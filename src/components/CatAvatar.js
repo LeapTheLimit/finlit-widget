@@ -1,10 +1,10 @@
 import React from 'react';
 import './CatAvatar.css';
 
-const CatAvatar = ({ isSpeaking }) => {
+const CatAvatar = ({ isSpeaking, isListening }) => {
   return (
-    <div className="cat-container">
-      <div className={`cat ${isSpeaking ? 'talking' : ''}`}>
+    <div className={`cat-container ${isListening ? 'listening' : ''} ${isSpeaking ? 'talking' : ''}`}>
+      <div className="cat">
         <div className="ear left"></div>
         <div className="ear right"></div>
         <div className="eye left"></div>

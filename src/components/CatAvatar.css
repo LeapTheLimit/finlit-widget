@@ -237,4 +237,23 @@
   to {
     transform: rotate(5deg);
   }
+}
+
+.cat-container.listening .ear {
+  animation: cat-ear-listen 1s infinite;
+}
+
+.cat-container.listening .ear.right {
+  animation-delay: 0.5s;
+}
+
+@keyframes cat-ear-listen {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(-20deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Only move mouth during talking */
+.cat-container.talking .mouth {
+  animation: cat-talk 0.3s infinite alternate;
 } 
