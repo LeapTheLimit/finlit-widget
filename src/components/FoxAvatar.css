@@ -1,7 +1,5 @@
 /* Add base reset */
-.fox *,
-.fox *:after,
-.fox *:before {
+*, *:after, *:before {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -9,206 +7,143 @@
 }
 
 .fox-container {
+  width: 120px;  /* Smaller size */
+  height: 120px;
   position: relative;
-  width: 130px;
-  height: 160px;
 }
 
 .fox {
-  width: 130px;
-  height: 160px;
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0.6);
+  transform: translate(-50%, -50%);
 }
 
-/* Head with brand colors */
+/* Main fox head */
 .fox .head {
-  width: 184px;
-  height: 184px;
-  background: #C736D9; /* Primary brand color */
-  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  background: #C736D9;
+  border-radius: 50% 50% 60% 60%;
   position: absolute;
-  z-index: 2;
-  top: 0;
-  right: 0;
-  overflow: hidden;
+  top: 10px;
+  left: 10px;
 }
 
-.fox .head:before,
-.fox .head:after {
+/* White face mask */
+.fox .head:before {
   content: '';
-  width: 184px;
-  height: 184px;
-  background: #ffffff; /* White accent */
+  width: 80px;
+  height: 60px;
+  background: white;
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  border-radius: 40px 40px 30px 30px;
+}
+
+/* Eyes */
+.fox .eye {
+  width: 8px;
+  height: 12px;
+  background: black;
+  position: absolute;
+  top: 45px;
   border-radius: 50%;
-  position: absolute;
-  z-index: 1;
-  bottom: -92px;
-}
-
-.fox .head:before { left: -92px; }
-.fox .head:after { right: -92px; }
-
-/* Eyes with animation */
-.fox .head .eye {
-  width: 18px;
-  height: 9px;
-  background: #000;
-  border-radius: 18px 18px 0 0;
-  position: absolute;
   z-index: 2;
-  bottom: 40px;
-  animation: blink 5s infinite;
+  animation: blink 4s infinite;
 }
 
-.fox .head .eye:nth-child(1) {
-  left: 37px;
-  transform: rotate(45deg);
+.fox .eye:first-child {
+  left: 30px;
 }
 
-.fox .head .eye:nth-child(2) {
-  right: 37px;
-  transform: rotate(-45deg);
-}
-
-/* Ears */
-.fox .ear {
-  width: 93px;
-  height: 93px;
-  background: #E9E9EB; /* Secondary color */
-  position: absolute;
-  top: 0;
-}
-
-.fox .ear:nth-child(3) {
-  border-radius: 0 93px 0 0;
-  left: 31px;
-}
-
-.fox .ear:nth-child(4) {
-  border-radius: 93px 0 0 0;
-  right: 0;
+.fox .eye:last-child {
+  right: 30px;
 }
 
 /* Nose */
 .fox .nose {
-  width: 27px;
-  height: 27px;
-  background: #000;
+  width: 12px;
+  height: 8px;
+  background: black;
+  position: absolute;
+  bottom: 30px;
+  left: 44px;
   border-radius: 50%;
+  z-index: 2;
+}
+
+/* Mouth - made visible and animated */
+.fox .mouth {
+  width: 20px;
+  height: 3px;
+  background: black;
   position: absolute;
-  z-index: 3;
-  top: 169px;
-  right: 78px;
+  bottom: 20px;
+  left: 40px;
+  border-radius: 10px;
+  z-index: 2;
+  transform-origin: center;
 }
 
-/* Body */
-.fox .body {
-  width: 107px;
-  height: 214px;
-  background: #C736D9;
-  border-radius: 0 214px 214px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 0;
-  right: 0;
-}
-
-/* Tail */
-.fox .tail {
-  width: 215px;
-  height: 107px;
-  background: #C736D9;
-  border-radius: 0 0 214px 214px;
-  position: absolute;
-  z-index: 1;
-  bottom: 0;
-  right: 0;
-  overflow: hidden;
-}
-
-.fox .tail:before {
-  content: '';
-  width: 57px;
-  height: 57px;
-  background: #fff;
-  border-radius: 50%;
-  position: absolute;
-  top: -30px;
-  left: -30px;
-}
-
-/* Animations */
-@keyframes blink {
-  15%, 50% { height: 1px; }
-  45% { height: 9px; }
-}
-
-/* Enhanced talking animation */
-.fox.talking {
-  animation: talk 0.5s ease-in-out infinite alternate;
+/* Talking animation */
+.fox.talking .mouth {
+  animation: talk 0.2s infinite alternate;
 }
 
 @keyframes talk {
-  0% {
-    transform: translate(-50%, -50%) rotate(-2deg) scale(0.6);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(5deg) scale(0.62);
-  }
-}
-
-/* Dynamic mouth animation */
-.fox .head .mouth {
-  width: 30px;
-  height: 15px;
-  background: #000;
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 0 0 15px 15px;
-  animation: mouth-talk 0.2s infinite alternate;
-}
-
-@keyframes mouth-talk {
-  0% {
+  0% { 
     height: 3px;
-    border-radius: 5px;
+    transform: scaleY(1);
   }
-  100% {
+  100% { 
     height: 10px;
-    border-radius: 0 0 15px 15px;
+    transform: scaleY(1.5);
   }
 }
 
-/* Add tongue animation */
-.fox.talking .head .mouth::after {
-  content: '';
-  width: 15px;
-  height: 8px;
-  background: #ff6b6b;
+@keyframes blink {
+  0%, 96%, 98% { transform: scaleY(1); }
+  97% { transform: scaleY(0.1); }
+}
+
+/* Ears */
+.fox .ear {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 30px solid #C736D9;
   position: absolute;
-  bottom: -3px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 0 0 8px 8px;
-  animation: tongue 0.3s ease-in-out infinite alternate;
+  top: -10px;
 }
 
-@keyframes tongue {
-  0% { height: 5px; }
-  100% { height: 8px; }
+.fox .ear:first-child {
+  left: 10px;
+  transform: rotate(-20deg);
 }
 
-/* Ear twitch animation */
-.fox.talking .ear {
-  animation: ear-twitch 0.3s ease-in-out infinite alternate;
+.fox .ear:last-child {
+  right: 10px;
+  transform: rotate(20deg);
 }
 
-@keyframes ear-twitch {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(5deg); }
+/* Ear animation during talking */
+.fox.talking .ear:first-child {
+  animation: leftEarTwitch 0.3s infinite alternate;
+}
+
+.fox.talking .ear:last-child {
+  animation: rightEarTwitch 0.3s infinite alternate;
+}
+
+@keyframes leftEarTwitch {
+  100% { transform: rotate(-25deg); }
+}
+
+@keyframes rightEarTwitch {
+  100% { transform: rotate(25deg); }
 } 
