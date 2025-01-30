@@ -6,7 +6,6 @@ import FoxAvatar from './FoxAvatar';
 import AvatarSelector from './AvatarSelector';
 import CatAvatar from './CatAvatar';
 import RobotAvatar from './RobotAvatar';
-import TomAvatar from './TomAvatar';
 
 const VoiceChat = ({ setCurrentView }) => {
     const [speaking, setSpeaking] = useState(false);
@@ -168,8 +167,6 @@ const VoiceChat = ({ setCurrentView }) => {
                 return <RobotAvatar isSpeaking={speaking || audioPlaying} />;
             case 'cat':
                 return <CatAvatar isSpeaking={speaking || audioPlaying} />;
-            case 'tom':
-                return <TomAvatar isSpeaking={speaking || audioPlaying} />;
             case 'fox':
             default:
                 return <FoxAvatar isSpeaking={speaking || audioPlaying} />;

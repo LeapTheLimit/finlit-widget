@@ -7,8 +7,7 @@ const AvatarSelector = ({ currentAvatar, onAvatarChange }) => {
   const avatars = [
     { id: 'fox', name: 'Fox' },
     { id: 'robot', name: 'Robot' },
-    { id: 'cat', name: 'Cat' },
-    { id: 'tom', name: 'Tom' }
+    { id: 'cat', name: 'Cat' }
   ];
 
   return (

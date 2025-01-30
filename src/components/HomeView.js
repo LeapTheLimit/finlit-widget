@@ -14,9 +14,6 @@ const HomeView = ({ setCurrentView }) => (
             <History setCurrentView={setCurrentView} />
         </div>
         <PoweredBy />
-        <div className="absolute bottom-0 left-0 right-0 flex justify-center items-center pb-4">
-            <p className="text-sm text-gray-400">Powered by Leap The Limit</p>
-        </div>
     </div>
 );
 
