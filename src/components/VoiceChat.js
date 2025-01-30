@@ -4,17 +4,12 @@ import Header from './Header';
 import micBg from '../assets/images/circleDiv.svg';
 import FoxAvatar from './FoxAvatar';
 import AvatarSelector from './AvatarSelector';
+import CatAvatar from './CatAvatar';
 
 // Placeholder components for other avatars
 const RobotAvatar = ({ isSpeaking }) => (
   <div className="w-48 h-48 bg-gray-800 rounded-full flex items-center justify-center text-white">
     Robot (Coming Soon)
-  </div>
-);
-
-const CatAvatar = ({ isSpeaking }) => (
-  <div className="w-48 h-48 bg-gray-800 rounded-full flex items-center justify-center text-white">
-    Cat (Coming Soon)
   </div>
 );
 

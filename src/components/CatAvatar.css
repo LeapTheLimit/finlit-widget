@@ -1,0 +1,240 @@
+.cat-container {
+  position: relative;
+  width: 150px;
+  height: 120px;
+}
+
+.cat {
+  position: absolute;
+  background: #E9E9EB;
+  width: 150px;
+  height: 120px;
+  border-radius: 150px 150px 50% 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cat .ear {
+  background: #E9E9EB;
+  position: relative;
+  z-index: -1;
+}
+
+.cat .ear.left {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px 20px 20px 20px;
+  left: 5px;
+  top: 5px;
+}
+
+.cat .ear.left:before {
+  content: '';
+  display: block;
+  width: 25px;
+  height: 25px;
+  background: pink;
+  border-radius: 10px 40px 30px 40px;
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  border: 2px solid #c99;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.cat .ear.right {
+  width: 50px;
+  height: 50px;
+  border-radius: 20px 8px 20px 20px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.cat .ear.right:before {
+  content: '';
+  display: block;
+  width: 25px;
+  height: 25px;
+  background: pink;
+  border-radius: 40px 8px 40px 30px;
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  border: 2px solid #c99;
+  border-left: 0;
+  border-bottom: 0;
+}
+
+.cat .eye {
+  position: absolute;
+  border: 3px solid #000;
+  width: 24px;
+  height: 5px;
+  top: 50px;
+  border-radius: 50%;
+  animation: cat-blink 4s infinite;
+}
+
+.cat .eye:before {
+  content: '';
+  display: block;
+  width: 14px;
+  height: 11px;
+  background: #000;
+  border-radius: 50%;
+  margin: -3px auto;
+}
+
+.cat .eye.left {
+  left: 50px;
+  margin: 0 0 0 -15px;
+}
+
+.cat .eye.right {
+  right: 50px;
+  margin: 0 -15px 0 0;
+}
+
+.cat .nose {
+  width: 16px;
+  height: 10px;
+  background: #000;
+  border-radius: 50%;
+  position: absolute;
+  top: 65px;
+  left: 50%;
+  margin: 0 0 0 -8px;
+}
+
+.cat .nose:before {
+  content: '';
+  display: block;
+  background: #E9E9EB;
+  width: 18px;
+  height: 12px;
+  border-radius: 50%;
+  position: absolute;
+  left: -10px;
+  top: 6px;
+}
+
+.cat .nose:after {
+  content: '';
+  display: block;
+  background: #E9E9EB;
+  width: 18px;
+  height: 12px;
+  border-radius: 50%;
+  position: absolute;
+  left: 8px;
+  top: 6px;
+}
+
+.cat .mouth {
+  border: 3px solid #000;
+  width: 12px;
+  height: 12px;
+  border-right: 0;
+  border-bottom: 0;
+  position: absolute;
+  left: 68px;
+  top: 79px;
+  transform: rotate(45deg);
+  transition: all 0.2s ease;
+}
+
+.cat .mouth:before {
+  content: '';
+  display: block;
+  width: 5px;
+  border-top: 3px solid #000;
+  position: absolute;
+  left: -6px;
+  top: -5px;
+  transform: rotate(45deg);
+}
+
+.cat .mouth:after {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  border: 3px solid #000;
+  border-radius: 0 0 30px 50%;
+  border-left: 0;
+  border-top: 0;
+  border-bottom-width: 2px;
+  position: absolute;
+  left: -13px;
+  top: 8px;
+}
+
+.cat .pink {
+  width: 3px;
+  height: 10px;
+  border: 9px double pink;
+  border-top: 0;
+  border-bottom: 0;
+  transform: skew(-25deg);
+  position: absolute;
+}
+
+.cat .pink.left {
+  left: 27px;
+  top: 70px;
+}
+
+.cat .pink.right {
+  left: 100px;
+  top: 70px;
+}
+
+/* Animations */
+@keyframes cat-blink {
+  0%, 96%, 98% {
+    transform: scaleY(1);
+    height: 5px;
+  }
+  97% {
+    transform: scaleY(0.1);
+    height: 1px;
+  }
+}
+
+/* Talking animation */
+.cat.talking .mouth {
+  animation: cat-talk 0.3s infinite alternate;
+}
+
+@keyframes cat-talk {
+  0% {
+    transform: rotate(45deg) scale(1);
+  }
+  100% {
+    transform: rotate(45deg) scale(1.2);
+    border-width: 4px;
+  }
+}
+
+.cat.talking .ear.left {
+  animation: cat-ear-left 0.3s infinite alternate;
+}
+
+.cat.talking .ear.right {
+  animation: cat-ear-right 0.3s infinite alternate;
+}
+
+@keyframes cat-ear-left {
+  to {
+    transform: rotate(-5deg);
+  }
+}
+
+@keyframes cat-ear-right {
+  to {
+    transform: rotate(5deg);
+  }
+} 
