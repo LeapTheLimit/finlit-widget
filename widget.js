@@ -5,7 +5,7 @@
     var widget = document.createElement('div');
     widget.id = 'root';
     widget.style.position = 'fixed';
-    widget.style.bottom = '20px';
+    widget.style.bottom = '60px';
     widget.style.right = '20px';
     widget.style.width = '300px';
     widget.style.height = '528px';  // 480px + 10%
