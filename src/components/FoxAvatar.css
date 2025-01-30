@@ -10,17 +10,17 @@
 
 .fox-container {
   position: relative;
-  width: 215px;
-  height: 275px;
+  width: 130px;
+  height: 160px;
 }
 
 .fox {
-  width: 215px;
-  height: 275px;
+  width: 130px;
+  height: 160px;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(0.6);
 }
 
 /* Head with brand colors */
@@ -146,16 +146,69 @@
   45% { height: 9px; }
 }
 
-/* Talking animations */
+/* Enhanced talking animation */
 .fox.talking {
-  transform: translate(-50%, -50%) rotate(5deg);
+  animation: talk 0.5s ease-in-out infinite alternate;
 }
 
-.fox.talking .head .mouth {
-  animation: mouth-move 0.3s infinite alternate;
+@keyframes talk {
+  0% {
+    transform: translate(-50%, -50%) rotate(-2deg) scale(0.6);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(5deg) scale(0.62);
+  }
 }
 
-@keyframes mouth-move {
-  from { height: 5px; }
-  to { height: 15px; }
+/* Dynamic mouth animation */
+.fox .head .mouth {
+  width: 30px;
+  height: 15px;
+  background: #000;
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 0 0 15px 15px;
+  animation: mouth-talk 0.2s infinite alternate;
+}
+
+@keyframes mouth-talk {
+  0% {
+    height: 3px;
+    border-radius: 5px;
+  }
+  100% {
+    height: 10px;
+    border-radius: 0 0 15px 15px;
+  }
+}
+
+/* Add tongue animation */
+.fox.talking .head .mouth::after {
+  content: '';
+  width: 15px;
+  height: 8px;
+  background: #ff6b6b;
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 0 0 8px 8px;
+  animation: tongue 0.3s ease-in-out infinite alternate;
+}
+
+@keyframes tongue {
+  0% { height: 5px; }
+  100% { height: 8px; }
+}
+
+/* Ear twitch animation */
+.fox.talking .ear {
+  animation: ear-twitch 0.3s ease-in-out infinite alternate;
+}
+
+@keyframes ear-twitch {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(5deg); }
 } 
