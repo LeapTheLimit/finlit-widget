@@ -87,21 +87,27 @@ const VoiceChat = ({ setCurrentView }) => {
         setShowLanguages(!showLanguages);
     };
 
-    const getLanguageCode = useCallback(() => {
-        switch (selectedLanguage) {
-            case 'EN': return 'en';
-            case 'عر': return 'ar';
-            case 'עב': return 'he';
-            default: return 'en';
+    const getLanguageCode = () => {
+        switch(selectedLanguage) {
+            case 'עב':
+                return 'he-IL';
+            case 'عر':
+                return 'ar-SA';
+            case 'EN':
+            default:
+                return 'en-US';
         }
-    }, [selectedLanguage]);
+    };
 
     const handleUserMessage = useCallback(async (message) => {
         try {
             const chatResponse = await fetch(`${serverUrl}/chat`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message, language: getLanguageCode() })
+                body: JSON.stringify({ 
+                    message, 
+                    language: getLanguageCode()
+                })
             });
             const chatData = await chatResponse.json();
             const botReply = chatData.response;
