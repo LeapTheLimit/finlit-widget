@@ -1,8 +1,22 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { AudioLines, Globe, Keyboard, MicIcon } from 'lucide-react';
+import { AudioLines, Globe, MicIcon } from 'lucide-react';
 import Header from './Header';
 import micBg from '../assets/images/circleDiv.svg';
 import FoxAvatar from './FoxAvatar';
+import AvatarSelector from './AvatarSelector';
+
+// Placeholder components for other avatars
+const RobotAvatar = ({ isSpeaking }) => (
+  <div className="w-48 h-48 bg-gray-800 rounded-full flex items-center justify-center text-white">
+    Robot (Coming Soon)
+  </div>
+);
+
+const CatAvatar = ({ isSpeaking }) => (
+  <div className="w-48 h-48 bg-gray-800 rounded-full flex items-center justify-center text-white">
+    Cat (Coming Soon)
+  </div>
+);
 
 const VoiceChat = ({ setCurrentView }) => {
     const [speaking, setSpeaking] = useState(false);
@@ -17,6 +31,7 @@ const VoiceChat = ({ setCurrentView }) => {
     const wordsPerBatch = 7;  
     const responseUpdateInterval = 2500;  
     const [audioPlaying, setAudioPlaying] = useState(false);
+    const [currentAvatar, setCurrentAvatar] = useState('fox');
 
     // Set up speech recognition (webkitSpeechRecognition for Chrome)
     useEffect(() => {
@@ -157,12 +172,24 @@ const VoiceChat = ({ setCurrentView }) => {
         }
     }, [currentWordIndex, responseWords, handleUserMessage, wordsPerBatch, responseUpdateInterval]);
 
+    const renderAvatar = () => {
+        switch(currentAvatar) {
+            case 'robot':
+                return <RobotAvatar isSpeaking={speaking || audioPlaying} />;
+            case 'cat':
+                return <CatAvatar isSpeaking={speaking || audioPlaying} />;
+            case 'fox':
+            default:
+                return <FoxAvatar isSpeaking={speaking || audioPlaying} />;
+        }
+    };
+
     return (
         <>
             <Header setCurrentView={setCurrentView} />
             <div className="bg-black h-full w-full flex flex-col items-center justify-start text-white relative overflow-hidden">
                 <div className='h-[50%] w-full flex justify-center items-center'>
-                    <FoxAvatar isSpeaking={speaking || audioPlaying} />
+                    {renderAvatar()}
                 </div>
 
                 <div className='h-[40%] flex items-center justify-center'>
@@ -175,30 +202,22 @@ const VoiceChat = ({ setCurrentView }) => {
 
                 <div className="absolute bottom-14 left-0 right-0 flex justify-between items-center px-4">
                     <div className="flex space-x-4">
-                        <button className="p-2 rounded-full bg-[#272626]">
-                            <Keyboard />
-                        </button>
+                        <AvatarSelector 
+                            currentAvatar={currentAvatar}
+                            onAvatarChange={setCurrentAvatar}
+                        />
                     </div>
-                    <button onClick={startListening} className="p-4 rounded-full" style={{ background: `url(${micBg})`, backgroundSize: 'cover' }}>
+                    <button 
+                        onClick={startListening} 
+                        className="p-4 rounded-full" 
+                        style={{ background: `url(${micBg})`, backgroundSize: 'cover' }}
+                    >
                         {speaking ? <AudioLines size={30} /> : <MicIcon size={30} />}
                     </button>
-                    <div className="relative">
-                        <button onClick={toggleLanguages} className="p-2 rounded-full bg-[#272626]">
-                            <Globe size={24} />
+                    <div className="flex space-x-4">
+                        <button className="p-2 rounded-full bg-[#272626]">
+                            <Globe />
                         </button>
-                        {showLanguages && (
-                            <div className="absolute bottom-full right-1 mb-2 flex flex-col space-y-2">
-                                {['עב', 'عر', 'EN'].map((lang) => (
-                                    <button
-                                        key={lang}
-                                        onClick={() => setSelectedLanguage(lang)}
-                                        className={`p-2 rounded-full text-xs flex items-center justify-center ${selectedLanguage === lang ? 'bg-purple-600' : 'bg-[#272626]'}`}
-                                    >
-                                        {lang}
-                                    </button>
-                                ))}
-                            </div>
-                        )}
                     </div>
                 </div>
             </div>
