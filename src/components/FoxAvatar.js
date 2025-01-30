@@ -1,103 +1,66 @@
 import React, { useState, useEffect } from 'react';
 
 const FoxAvatar = ({ isSpeaking }) => {
-    const [mouthPath, setMouthPath] = useState("M 70 120 Q 100 130 130 120");
+    const [mouthOpen, setMouthOpen] = useState(false);
 
-    // Dynamic mouth animation
+    // Animate mouth when speaking
     useEffect(() => {
         if (isSpeaking) {
-            const mouthFrames = [
-                "M 70 120 Q 100 150 130 120", // Open
-                "M 70 125 Q 100 145 130 125", // Mid-open
-                "M 70 130 Q 100 140 130 130"  // Wider open
-            ];
-            
-            let frame = 0;
-            const animateMouth = () => {
-                setMouthPath(mouthFrames[frame]);
-                frame = (frame + 1) % mouthFrames.length;
-            };
-            
-            const interval = setInterval(animateMouth, 200);
+            const interval = setInterval(() => {
+                setMouthOpen(prev => !prev);
+            }, 300);
             return () => clearInterval(interval);
-        } else {
-            setMouthPath("M 70 120 Q 100 130 130 120");
         }
     }, [isSpeaking]);
 
     return (
         <div className="relative w-48 h-48">
             <svg viewBox="0 0 200 200" className="w-full h-full">
-                {/* Fox head shape */}
-                <path 
-                    d="M 20 100 Q 50 20 100 20 Q 150 20 180 100 Q 150 180 100 180 Q 50 180 20 100 Z" 
-                    fill="#FF8C00" 
-                    className="drop-shadow-md"
-                />
-
-                {/* Inner face fur */}
-                <path
-                    d="M 40 90 Q 60 50 100 50 Q 140 50 160 90 Q 140 130 100 130 Q 60 130 40 90 Z"
-                    fill="#FFB347"
-                    className="opacity-90"
-                />
-
+                {/* Background */}
+                <rect width="200" height="200" fill="#87CEEB" />
+                
+                {/* Body */}
+                <ellipse cx="100" cy="130" rx="60" ry="80" fill="#FFA500" />
+                
+                {/* Head */}
+                <circle cx="100" cy="80" r="50" fill="#FFA500" />
+                
                 {/* Ears */}
-                <g className="transition-all duration-300">
-                    <path d="M 40 50 Q 30 20 60 40 L 40 50 Z" fill="#FF8C00" />
-                    <path d="M 160 50 Q 170 20 140 40 L 160 50 Z" fill="#FF8C00" />
-                    <path d="M 45 45 Q 35 30 55 35 Z" fill="#FFD700" />
-                    <path d="M 155 45 Q 165 30 145 35 Z" fill="#FFD700" />
-                </g>
-
-                {/* Eyes with depth */}
-                <g className="animate-eye-blink">
-                    <ellipse cx="70" cy="85" rx="14" ry="10" fill="#2d2d2d" />
-                    <ellipse cx="130" cy="85" rx="14" ry="10" fill="#2d2d2d" />
-                    <circle cx="75" cy="82" r="3" fill="rgba(255,255,255,0.8)" />
-                    <circle cx="135" cy="82" r="3" fill="rgba(255,255,255,0.8)" />
-                </g>
-
+                <path d="M60 30 L80 10 L100 30" fill="#FFA500" />
+                <path d="M140 30 L160 10 L140 50" fill="#FFA500" />
+                
+                {/* Inner Ears */}
+                <path d="M70 25 L85 15 L100 25" fill="#FFD700" />
+                <path d="M130 25 L145 15 L130 45" fill="#FFD700" />
+                
+                {/* Eyes */}
+                <circle cx="80" cy="70" r="12" fill="white" />
+                <circle cx="120" cy="70" r="12" fill="white" />
+                <circle cx="85" cy="70" r="5" fill="#333" />
+                <circle cx="125" cy="70" r="5" fill="#333" />
+                
                 {/* Nose */}
+                <path d="M95 90 L105 90 L100 100 Z" fill="#333" />
+                
+                {/* Mouth */}
                 <path 
-                    d="M 95 110 Q 100 115 105 110 Q 100 120 95 110 Z" 
-                    fill="url(#noseGradient)"
-                >
-                    <defs>
-                        <linearGradient id="noseGradient">
-                            <stop offset="0%" stopColor="#4a4a4a" />
-                            <stop offset="100%" stopColor="#2d2d2d" />
-                        </linearGradient>
-                    </defs>
-                </path>
-
-                {/* Animated mouth */}
-                <path 
-                    d={`${mouthPath} Q100 135 70 120`}
-                    stroke="#2d2d2d" 
-                    strokeWidth="3" 
-                    fill="none"
-                    className="transition-all duration-100"
+                    d={mouthOpen ? 
+                        "M85 110 Q100 130 115 110" : 
+                        "M85 110 Q100 120 115 110"}
+                    stroke="#333" 
+                    fill="none" 
+                    strokeWidth="3"
                 />
-
-                {/* Whiskers */}
-                <g className="opacity-75">
-                    <path d="M 30 100 Q 50 105 60 100" stroke="#2d2d2d" strokeWidth="1.5" />
-                    <path d="M 30 110 Q 50 115 60 110" stroke="#2d2d2d" strokeWidth="1.5" />
-                    <path d="M 170 100 Q 150 105 140 100" stroke="#2d2d2d" strokeWidth="1.5" />
-                    <path d="M 170 110 Q 150 115 140 110" stroke="#2d2d2d" strokeWidth="1.5" />
-                </g>
-
-                {/* Cheek fluff */}
+                
+                {/* Legs */}
+                <rect x="70" y="160" width="20" height="40" rx="10" fill="#FFA500" />
+                <rect x="110" y="160" width="20" height="40" rx="10" fill="#FFA500" />
+                
+                {/* Tail */}
                 <path 
-                    d="M 50 120 Q 70 130 50 140" 
-                    fill="#FFD700" 
-                    className="opacity-40"
-                />
-                <path 
-                    d="M 150 120 Q 130 130 150 140" 
-                    fill="#FFD700" 
-                    className="opacity-40"
+                    d="M160 100 Q180 80 200 120 Q160 140 140 160" 
+                    fill="#FFA500" 
+                    className="opacity-90"
                 />
             </svg>
         </div>
