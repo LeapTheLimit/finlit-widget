@@ -1,122 +1,109 @@
 import React, { useState, useEffect } from 'react';
 
-const FoxAvatar = ({ isSpeaking, mood = 'normal' }) => {
-  const [reaction, setReaction] = useState(null);
-  const [isBlinking, setIsBlinking] = useState(false);
+const FoxAvatar = ({ isSpeaking }) => {
+    const [mouthPath, setMouthPath] = useState("M 70 120 Q 100 130 130 120");
+    const [eyeState, setEyeState] = useState('neutral');
 
-  // Random reactions for different types of responses
-  const reactions = {
-    smart: {
-      icon: "💡",
-      text: "Great question!",
-      earAnimation: "ear-perk",
-    },
-    wow: {
-      icon: "✨",
-      text: "Fascinating!",
-      earAnimation: "ear-wiggle",
-    },
-    think: {
-      icon: "🤔",
-      text: "Let me think...",
-      earAnimation: "ear-tilt",
-    }
-  };
+    // Dynamic mouth animation during speech
+    useEffect(() => {
+        if (isSpeaking) {
+            const mouthFrames = [
+                "M 70 120 Q 100 150 130 120", // Open
+                "M 70 125 Q 100 145 130 125", // Mid-open
+                "M 70 130 Q 100 140 130 130" // Wider open
+            ];
+            
+            let frame = 0;
+            const animateMouth = () => {
+                setMouthPath(mouthFrames[frame]);
+                frame = (frame + 1) % mouthFrames.length;
+            };
+            
+            const interval = setInterval(animateMouth, 200);
+            return () => clearInterval(interval);
+        } else {
+            setMouthPath("M 70 120 Q 100 130 130 120");
+        }
+    }, [isSpeaking]);
 
-  // Randomly trigger reactions
-  useEffect(() => {
-    if (isSpeaking) {
-      const random = Math.random();
-      if (random < 0.3) {
-        const reactionTypes = Object.keys(reactions);
-        const randomReaction = reactionTypes[Math.floor(Math.random() * reactionTypes.length)];
-        setReaction(reactions[randomReaction]);
-        setTimeout(() => setReaction(null), 3000);
-      }
-    }
-  }, [isSpeaking]);
+    return (
+        <div className="relative w-48 h-48 group">
+            <svg viewBox="0 0 200 200" className="w-full h-full">
+                {/* Head with depth */}
+                <defs>
+                    <radialGradient id="foxHead" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stopColor="#FFB347" />
+                        <stop offset="100%" stopColor="#FF8C00" />
+                    </radialGradient>
+                    
+                    <filter id="furTexture">
+                        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" />
+                        <feDiffuseLighting lightingColor="#fff7e6" surfaceScale="2">
+                            <feDistantLight azimuth="45" elevation="60" />
+                        </feDiffuseLighting>
+                    </filter>
+                </defs>
 
-  // Blinking animation
-  useEffect(() => {
-    const blinkInterval = setInterval(() => {
-      setIsBlinking(true);
-      setTimeout(() => setIsBlinking(false), 200);
-    }, 4000);
+                {/* Main head shape */}
+                <circle cx="100" cy="100" r="80" fill="url(#foxHead)" filter="url(#furTexture)" />
 
-    return () => clearInterval(blinkInterval);
-  }, []);
+                {/* Ears */}
+                <g className="transition-all duration-300 group-hover:translate-y-1">
+                    <path d="M40 50 Q30 20 60 40" fill="#FF8C00" className="drop-shadow-md" />
+                    <path d="M160 50 Q170 20 140 40" fill="#FF8C00" className="drop-shadow-md" />
+                </g>
 
-  return (
-    <div className="relative w-48 h-48">
-      {/* Reaction bubble */}
-      {reaction && (
-        <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 bg-white rounded-xl p-2 flex items-center gap-2 animate-popup">
-          <span className="text-2xl">{reaction.icon}</span>
-          <span className="text-black text-sm font-medium">{reaction.text}</span>
+                {/* Face mask */}
+                <path d="M60 110 Q100 160 140 110 Q100 130 60 110" fill="#fff5e6" className="opacity-90" />
+
+                {/* Eyes with depth */}
+                <g className="transition-all duration-200">
+                    <ellipse cx="70" cy="85" rx="14" ry="10" fill="#2d2d2d" />
+                    <ellipse cx="130" cy="85" rx="14" ry="10" fill="#2d2d2d" />
+                    
+                    {/* Eye highlights */}
+                    <path d="M65 80 Q70 75 75 80" fill="white" className="opacity-80" />
+                    <path d="M125 80 Q130 75 135 80" fill="white" className="opacity-80" />
+                </g>
+
+                {/* Nose with gradient */}
+                <path d="M95 110 Q100 115 105 110 Q100 120 95 110" fill="url(#noseGradient)">
+                    <defs>
+                        <linearGradient id="noseGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#4a4a4a" />
+                            <stop offset="100%" stopColor="#2d2d2d" />
+                        </linearGradient>
+                    </defs>
+                </path>
+
+                {/* Dynamic mouth */}
+                <path 
+                    d={`${mouthPath} Q100 135 70 120`}
+                    fill="none" 
+                    stroke="#2d2d2d" 
+                    strokeWidth="3"
+                    className="transition-all duration-100"
+                />
+
+                {/* Tongue when speaking */}
+                {isSpeaking && (
+                    <path d="M85 125 Q100 140 115 125" fill="#ff7b7b" className="animate-tongue" />
+                )}
+
+                {/* Cheek blush */}
+                <circle cx="60" cy="110" r="15" fill="#ffd1dc" className="opacity-30" />
+                <circle cx="140" cy="110" r="15" fill="#ffd1dc" className="opacity-30" />
+
+                {/* Whiskers */}
+                <g className="opacity-80">
+                    <path d="M40 100 Q50 105 60 100" stroke="#2d2d2d" fill="none" />
+                    <path d="M40 110 Q50 115 60 110" stroke="#2d2d2d" fill="none" />
+                    <path d="M160 100 Q150 105 140 100" stroke="#2d2d2d" fill="none" />
+                    <path d="M160 110 Q150 115 140 110" stroke="#2d2d2d" fill="none" />
+                </g>
+            </svg>
         </div>
-      )}
-
-      <svg viewBox="0 0 200 200" className="w-full h-full">
-        {/* Shadow for depth */}
-        <circle cx="100" cy="100" r="80" fill="#E88B3A" className="drop-shadow-lg" />
-        
-        {/* Fox face - with gradient */}
-        <defs>
-          <radialGradient id="foxFace" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-            <stop offset="0%" stopColor="#FFA664" />
-            <stop offset="100%" stopColor="#FF9B50" />
-          </radialGradient>
-        </defs>
-        <circle cx="100" cy="100" r="80" fill="url(#foxFace)" />
-        
-        {/* Ears with animation classes */}
-        <g className={`transition-transform ${reaction?.earAnimation || ''}`}>
-          <path d="M 40 50 L 30 10 L 70 40 Z" fill="#FF9B50" className="left-ear" />
-          <path d="M 160 50 L 170 10 L 130 40 Z" fill="#FF9B50" className="right-ear" />
-        </g>
-        
-        {/* White face patches with subtle gradient */}
-        <path 
-          d="M 60 120 Q 100 150 140 120 Q 100 140 60 120" 
-          fill="white" 
-          className="opacity-90"
-        />
-        
-        {/* Eyes with blinking and expressions */}
-        <g className={`transition-transform ${isBlinking ? 'scale-y-[0.1]' : ''}`}>
-          <circle cx="70" cy="85" r="12" fill="#1A1A1A" />
-          <circle cx="130" cy="85" r="12" fill="#1A1A1A" />
-          <circle cx="75" cy="82" r="4" fill="white" className="animate-twinkle" />
-          <circle cx="135" cy="82" r="4" fill="white" className="animate-twinkle" />
-        </g>
-        
-        {/* Nose with shine */}
-        <ellipse cx="100" cy="105" rx="8" ry="6" fill="#1A1A1A" />
-        <circle cx="98" cy="104" r="2" fill="white" className="opacity-60" />
-        
-        {/* Animated Mouth with more expressive movement */}
-        <path 
-          d={isSpeaking 
-            ? "M 70 120 Q 100 160 130 120 Q 100 135 70 120" // More open mouth
-            : "M 70 120 Q 100 130 130 120 Q 100 120 70 120" // Closed mouth
-          }
-          fill="none"
-          stroke="#1A1A1A"
-          strokeWidth="3"
-          className={`transition-all duration-75 ${isSpeaking ? 'talking-animal' : ''}`}
-        />
-        
-        {/* Inner mouth detail when speaking */}
-        {isSpeaking && (
-          <path 
-            d="M 75 125 Q 100 145 125 125" 
-            fill="#FF6B6B" 
-            className="opacity-80"
-          />
-        )}
-      </svg>
-    </div>
-  );
+    );
 };
 
 export default FoxAvatar; 
