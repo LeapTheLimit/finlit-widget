@@ -325,3 +325,22 @@
     animation: eye-blink 4s infinite;
 }
 
+/* Add these responsive styles */
+@media screen and (max-height: 600px) {
+    .mobile-widget {
+        transform-origin: bottom right;
+        transform: scale(0.8);
+    }
+}
+
+@media screen and (max-height: 500px) {
+    .mobile-widget {
+        transform: scale(0.7);
+    }
+}
+
+/* Ensure smooth scaling */
+.mobile-widget {
+    transition: transform 0.3s ease;
+}
+
