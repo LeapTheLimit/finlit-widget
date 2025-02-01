@@ -133,15 +133,17 @@ const VoiceView = ({ setCurrentView }) => {
             <Header setCurrentView={setCurrentView} />
             <div className="flex-1 flex flex-col items-center justify-center">
                 <TimedAnimatedCircles isListening={isListening || synthesizing} />
-                <p className="text-3xl font-bold mb-12 text-center">
-                    {recognizedText || 'Click the mic and speak...'}
-                </p>
-                <button
-                    className={`bg-purple-500 p-6 rounded-full ${isListening ? 'animate-pulse' : ''}`}
-                    onClick={toggleListening}  // Toggle listening on click
-                >
-                    {isListening ? <AudioLines size={32} /> : <Mic size={32} />}
-                </button>
+                <div className="flex-1 flex flex-col items-center justify-start pt-12">
+                    <p className="text-3xl font-bold mb-12 text-center max-w-[80%]">
+                        {recognizedText || 'Click the mic and speak...'}
+                    </p>
+                    <button
+                        className={`bg-purple-500 p-6 rounded-full ${isListening ? 'animate-pulse' : ''}`}
+                        onClick={toggleListening}
+                    >
+                        {isListening ? <AudioLines size={32} /> : <Mic size={32} />}
+                    </button>
+                </div>
             </div>
             <PoweredBy />
         </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Settings } from 'lucide-react'; // Using Settings icon instead of Keyboard temporarily
+import { UserRound } from 'lucide-react'; // Import UserRound instead of Settings
 
 const AvatarSelector = ({ currentAvatar, onAvatarChange }) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -16,7 +16,7 @@ const AvatarSelector = ({ currentAvatar, onAvatarChange }) => {
         onClick={() => setIsOpen(!isOpen)} 
         className="p-2 rounded-full bg-[#272626] hover:bg-[#363636] transition-colors"
       >
-        <Settings size={24} />
+        <UserRound size={24} />
       </button>
 
       {isOpen && (

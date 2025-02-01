@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { AudioLines, Globe, MicIcon } from 'lucide-react';
+import { AudioLines, Globe, MicIcon, UserRound } from 'lucide-react';
 import Header from './Header';
 import micBg from '../assets/images/circleDiv.svg';
 import FoxAvatar from './FoxAvatar';
@@ -232,12 +232,12 @@ const VoiceChat = ({ setCurrentView }) => {
         <>
             <Header setCurrentView={setCurrentView} />
             <div className="bg-black h-full w-full flex flex-col items-center justify-start text-white relative overflow-hidden">
-                <div className='h-[50%] w-full flex justify-center items-center'>
+                <div className='h-[45%] w-full flex justify-center items-center'>
                     {renderAvatar()}
                 </div>
 
-                <div className='h-[40%] flex items-center justify-center'>
-                    <p className="text-2xl font-medium mb-4 px-4 text-center">
+                <div className='h-[45%] flex items-start justify-center px-4'>
+                    <p className="text-2xl font-medium text-center max-w-[80%]">
                         {botResponse.split(' ').map((word, index) => (
                             <span key={index} className='text-white'>{word} </span>
                         ))}
@@ -263,7 +263,7 @@ const VoiceChat = ({ setCurrentView }) => {
                             onClick={toggleLanguages} 
                             className="p-2 rounded-full bg-[#272626]"
                         >
-                            <Globe size={24} />
+                            <UserRound size={24} />
                         </button>
                         {showLanguages && (
                             <div className="absolute bottom-full right-1 mb-2 flex flex-col space-y-2">
