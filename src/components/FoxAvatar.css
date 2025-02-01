@@ -113,26 +113,26 @@
   border-radius: 50%;
 }
 
-/* White face parts - made smaller and more accurate */
+/* White face parts - aligned and fixed */
 .fox__cheek {
   position: absolute;
-  width: 48px; /* Made even smaller */
-  height: 48px; /* Made even smaller */
+  width: 45px; /* Made consistent */
+  height: 45px; /* Made consistent */
   background-color: white;
-  top: 62px; /* Adjusted position */
+  top: 65px; /* Aligned vertically */
   z-index: 3;
 }
 
 .fox__cheek--left {
-  left: 12px;
-  transform: rotate(-10deg); /* Adjusted angle */
-  border-radius: 0 25px 0 25px;
+  left: 15px;
+  transform: rotate(-5deg); /* Reduced rotation */
+  border-radius: 0 20px 0 20px;
 }
 
 .fox__cheek--right {
-  right: 12px;
-  transform: rotate(10deg); /* Adjusted angle */
-  border-radius: 25px 0 25px 0;
+  right: 15px;
+  transform: rotate(5deg); /* Reduced rotation */
+  border-radius: 20px 0 20px 0;
 }
 
 /* Add fur texture to cheeks */
@@ -148,27 +148,27 @@
   filter: brightness(98%);
 }
 
-/* Nose */
+/* Nose - moved up */
 .fox__nose {
   position: absolute;
-  top: 87px;
+  top: 82px; /* Moved up from 87px */
   left: 50%;
   transform: translateX(-50%);
-  width: 16px;
-  height: 10px;
+  width: 14px; /* Slightly smaller */
+  height: 8px; /* Slightly smaller */
   border-radius: 50%;
   background-color: #000;
   z-index: 4;
 }
 
-/* Mouth - updated for better animation */
+/* Mouth - moved down */
 .fox__mouth {
   position: absolute;
-  top: 95px;
+  top: 98px; /* Moved down from 95px */
   left: 50%;
   transform: translateX(-50%);
   width: 16px;
-  height: 12px;
+  height: 10px;
   background-color: black;
   border-radius: 0 0 50% 50%;
   z-index: 4;
@@ -188,15 +188,15 @@
 /* Updated talking animation for mouth */
 @keyframes fox-talk {
   0% {
-    height: 12px;
+    height: 10px;
     border-radius: 0 0 50% 50%;
   }
   50% {
-    height: 18px;
+    height: 16px;
     border-radius: 50%;
   }
   100% {
-    height: 12px;
+    height: 10px;
     border-radius: 0 0 50% 50%;
   }
 }
