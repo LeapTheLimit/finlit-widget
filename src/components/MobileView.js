@@ -1,18 +1,12 @@
-import React from 'react';
-import WelcomeView from './WelcomeView';
-import HomeView from './HomeView';
-import VoiceChat from './VoiceChat';
-
-const MobileView = () => {
-    const [currentView, setCurrentView] = React.useState('welcome');
+const MobileView = ({ isOpen, children }) => {
+    if (!isOpen) return null;
 
     return (
-        <div className="fixed bottom-4 right-4 bg-black text-white rounded-3xl overflow-hidden shadow-2xl min-h-[400px] max-h-[85vh] h-[600px] w-[350px]">
-            {currentView === 'welcome' && <WelcomeView setCurrentView={setCurrentView} />}
-            {currentView === 'home' && <HomeView setCurrentView={setCurrentView} />}
-            {currentView === 'voice' && <VoiceChat setCurrentView={setCurrentView} />}
+        <div className="fixed bottom-10 right-0 mb-4 mr-4 md:mb-6 md:mr-6">
+            <div className="bg-black w-[300px] h-[528px] rounded-2xl overflow-hidden flex flex-col shadow-xl">
+                <div className="flex-1 overflow-y-auto scrollbar-none p-4">{children}</div>
+            </div>
         </div>
     );
 };
-
-export default MobileView;
+export default MobileView
