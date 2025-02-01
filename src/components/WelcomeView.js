@@ -6,10 +6,10 @@ const WelcomeView = ({ setCurrentView }) => (
     <div className="h-full flex flex-col justify-between">
         <LogoPoweredBy />
         
-        <div className="flex-1 flex flex-col items-center justify-start pt-8 -mt-16">
-            <div className="text-center mb-8">
-                <p className="text-white text-sm mb-2">Your AI Finance Buddy</p>
-                <h1 className="text-2xl font-medium px-4">
+        <div className="flex-1 flex flex-col items-center justify-start pt-16">
+            <div className="text-center mb-12">
+                <p className="text-white text-sm mb-4">Your AI Finance Buddy</p>
+                <h1 className="text-4xl font-bold px-4">
                     Hey there! I'm Finlix!
                 </h1>
             </div>
