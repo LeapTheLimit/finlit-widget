@@ -135,16 +135,15 @@
 }
 
 .cat .mouth {
-  width: 16px;
-  height: 10px;
-  border: 2px solid #000;
-  border-top: 0;
-  border-radius: 0 0 50% 50%;
+  width: 14px;
+  height: 3px;
+  background: #000;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 75px;
+  top: 78px;
   z-index: 3;
+  border-radius: 10px;
 }
 
 .cat .mouth:before {
@@ -213,16 +212,16 @@
 
 @keyframes cat-talk {
   0% {
-    height: 10px;
-    border-radius: 0 0 50% 50%;
+    height: 3px;
+    border-radius: 10px;
   }
   50% {
-    height: 15px;
+    height: 10px;
     border-radius: 50%;
   }
   100% {
-    height: 10px;
-    border-radius: 0 0 50% 50%;
+    height: 3px;
+    border-radius: 10px;
   }
 }
 
@@ -263,4 +262,81 @@
 /* Only move mouth during talking */
 .cat-container.talking .mouth {
   animation: cat-talk 0.3s infinite;
+}
+
+/* Whiskers */
+.cat .whiskers {
+  position: absolute;
+  top: 70px;
+  z-index: 2;
+}
+
+.cat .whiskers.left {
+  left: 10px;
+}
+
+.cat .whiskers.right {
+  right: 10px;
+}
+
+.cat .whisker {
+  width: 25px;
+  height: 2px;
+  background: #000;
+  margin: 6px 0;
+  border-radius: 2px;
+}
+
+/* Position each whisker */
+.cat .whiskers.left .whisker:nth-child(1) {
+  transform: rotate(-10deg);
+  width: 20px;
+}
+
+.cat .whiskers.left .whisker:nth-child(2) {
+  transform: rotate(-5deg);
+  width: 25px;
+}
+
+.cat .whiskers.left .whisker:nth-child(3) {
+  transform: rotate(0deg);
+  width: 22px;
+}
+
+.cat .whiskers.right .whisker:nth-child(1) {
+  transform: rotate(10deg);
+  width: 20px;
+}
+
+.cat .whiskers.right .whisker:nth-child(2) {
+  transform: rotate(5deg);
+  width: 25px;
+}
+
+.cat .whiskers.right .whisker:nth-child(3) {
+  transform: rotate(0deg);
+  width: 22px;
+}
+
+/* Whisker animation during talking */
+@keyframes whisker-move {
+  0% {
+    transform: rotate(var(--start-angle));
+  }
+  50% {
+    transform: rotate(calc(var(--start-angle) - 5deg));
+  }
+  100% {
+    transform: rotate(var(--start-angle));
+  }
+}
+
+.cat.talking .whiskers.left .whisker {
+  animation: whisker-move 0.3s infinite;
+  --start-angle: -10deg;
+}
+
+.cat.talking .whiskers.right .whisker {
+  animation: whisker-move 0.3s infinite;
+  --start-angle: 10deg;
 } 
