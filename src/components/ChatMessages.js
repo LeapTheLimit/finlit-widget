@@ -53,7 +53,7 @@ const ChatMessages = ({ pastConversation = [], setCurrentView, isHistory = false
                     },
                     body: JSON.stringify({
                         message: inputMessage,
-                        language: detectedLanguage  // Send detected language
+                        language: detectedLanguage
                     }),
                 });
 
@@ -62,24 +62,36 @@ const ChatMessages = ({ pastConversation = [], setCurrentView, isHistory = false
                 }
 
                 const data = await response.json();
-                const newFinlixMessage = { text: data.response, sender: 'Finlix' };
+                const newFinlixMessage = { 
+                    text: data.response, 
+                    sender: 'Finlix',
+                    language: data.language 
+                };
                 setMessages((prevMessages) => [...prevMessages, newFinlixMessage]);
 
-                // Save the entire conversation (user + bot)
-                await fetch(`${serverUrl}/save-chat-message`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        conversation: [
-                            { message: inputMessage, category: 'user' },
-                            { message: data.response, category: 'bot' },
-                        ],
-                    }),
-                });
+                try {
+                    // Save the conversation separately
+                    await fetch(`${serverUrl}/save-chat-message`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            messages: [
+                                { text: inputMessage, sender: 'user' },
+                                { text: data.response, sender: 'Finlix' }
+                            ]
+                        }),
+                    });
+                } catch (saveError) {
+                    console.error('Error saving chat:', saveError);
+                    // Continue even if save fails
+                }
 
             } catch (error) {
                 console.error('Error in chat API:', error);
-                const errorMessage = { text: 'There was an error processing your request.', sender: 'Finlix' };
+                const errorMessage = { 
+                    text: 'There was an error processing your request.', 
+                    sender: 'Finlix' 
+                };
                 setMessages((prevMessages) => [...prevMessages, errorMessage]);
             }
         }
