@@ -134,43 +134,47 @@
   top: 6px;
 }
 
+/* Updated mouth styling */
 .cat .mouth {
-  width: 14px;
-  height: 3px;
-  background: #000;
+  width: 20px;
+  height: 8px;
+  border: none;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 78px;
+  top: 75px;
   z-index: 3;
-  border-radius: 10px;
 }
 
+/* Create the cat smile */
 .cat .mouth:before {
   content: '';
   position: absolute;
-  width: 6px;
-  height: 6px;
-  background: #000;
-  border-radius: 50%;
-  bottom: -2px;
+  width: 20px;
+  height: 10px;
+  border: 2px solid #000;
+  border-radius: 0 0 50% 50%;
+  border-top: 0;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.cat .mouth:after {
-  content: '';
-  display: block;
-  width: 10px;
-  height: 10px;
-  border: 3px solid #000;
-  border-radius: 0 0 30px 50%;
-  border-left: 0;
-  border-top: 0;
-  border-bottom-width: 2px;
-  position: absolute;
-  left: -13px;
-  top: 8px;
+/* Talking animation for the mouth */
+@keyframes cat-talk {
+  0% {
+    height: 10px;
+  }
+  50% {
+    height: 15px;
+    border-radius: 45%;
+  }
+  100% {
+    height: 10px;
+  }
+}
+
+.cat.talking .mouth:before {
+  animation: cat-talk 0.3s infinite;
 }
 
 .cat .pink {
@@ -210,21 +214,6 @@
   animation: cat-talk 0.3s infinite;
 }
 
-@keyframes cat-talk {
-  0% {
-    height: 3px;
-    border-radius: 10px;
-  }
-  50% {
-    height: 10px;
-    border-radius: 50%;
-  }
-  100% {
-    height: 3px;
-    border-radius: 10px;
-  }
-}
-
 .cat.talking .ear.left {
   animation: cat-ear-left 0.3s infinite alternate;
 }
@@ -253,12 +242,6 @@
   animation-delay: 0.5s;
 }
 
-@keyframes cat-ear-listen {
-  0% { transform: rotate(0deg); }
-  50% { transform: rotate(-20deg); }
-  100% { transform: rotate(0deg); }
-}
-
 /* Only move mouth during talking */
 .cat-container.talking .mouth {
   animation: cat-talk 0.3s infinite;
@@ -272,25 +255,23 @@
 }
 
 .cat .whiskers.left {
-  left: 10px;
+  left: 15px;
 }
 
 .cat .whiskers.right {
-  right: 10px;
+  right: 15px;
 }
 
 .cat .whisker {
-  width: 25px;
-  height: 2px;
+  width: 22px;
+  height: 1.5px;
   background: #000;
-  margin: 6px 0;
-  border-radius: 2px;
+  margin: 8px 0;
 }
 
-/* Position each whisker */
+/* Position whiskers */
 .cat .whiskers.left .whisker:nth-child(1) {
   transform: rotate(-10deg);
-  width: 20px;
 }
 
 .cat .whiskers.left .whisker:nth-child(2) {
@@ -300,12 +281,11 @@
 
 .cat .whiskers.left .whisker:nth-child(3) {
   transform: rotate(0deg);
-  width: 22px;
+  width: 20px;
 }
 
 .cat .whiskers.right .whisker:nth-child(1) {
   transform: rotate(10deg);
-  width: 20px;
 }
 
 .cat .whiskers.right .whisker:nth-child(2) {
@@ -315,7 +295,7 @@
 
 .cat .whiskers.right .whisker:nth-child(3) {
   transform: rotate(0deg);
-  width: 22px;
+  width: 20px;
 }
 
 /* Whisker animation during talking */
