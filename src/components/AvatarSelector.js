@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserRound } from 'lucide-react'; // Import UserRound instead of Settings
+import { Users } from 'lucide-react'; // Changed to Users icon for character selection
 
 const AvatarSelector = ({ currentAvatar, onAvatarChange }) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -16,7 +16,7 @@ const AvatarSelector = ({ currentAvatar, onAvatarChange }) => {
         onClick={() => setIsOpen(!isOpen)} 
         className="p-2 rounded-full bg-[#272626] hover:bg-[#363636] transition-colors"
       >
-        <UserRound size={24} />
+        <Users size={24} /> {/* Changed to Users icon */}
       </button>
 
       {isOpen && (

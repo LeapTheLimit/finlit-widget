@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { AudioLines, Globe, MicIcon, UserRound } from 'lucide-react';
+import { AudioLines, Globe, MicIcon, Users } from 'lucide-react';
 import Header from './Header';
 import micBg from '../assets/images/circleDiv.svg';
 import FoxAvatar from './FoxAvatar';
@@ -263,7 +263,7 @@ const VoiceChat = ({ setCurrentView }) => {
                             onClick={toggleLanguages} 
                             className="p-2 rounded-full bg-[#272626]"
                         >
-                            <UserRound size={24} />
+                            <Globe size={24} />
                         </button>
                         {showLanguages && (
                             <div className="absolute bottom-full right-1 mb-2 flex flex-col space-y-2">
