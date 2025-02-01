@@ -9,7 +9,8 @@ const ChatMessages = ({ pastConversation = [], setCurrentView, isHistory = false
     const [messages, setMessages] = useState(pastConversation || []);  // Initialize with pastConversation if provided
     const [inputMessage, setInputMessage] = useState('');
     const [listening, setListening] = useState(false);  // Track if the mic is listening
-    const [showSuggestions, setShowSuggestions] = useState(!pastConversation.length); // Show suggestions only if there are no past messages
+    const [suggestions, setSuggestions] = useState([]);
+    const [showSuggestions, setShowSuggestions] = useState(false);
     const messagesEndRef = useRef(null);
     const serverUrl = 'https://leapthelimit-1057493174729.me-west1.run.app';
 
@@ -21,6 +22,39 @@ const ChatMessages = ({ pastConversation = [], setCurrentView, isHistory = false
     };
 
     useEffect(scrollToBottom, [messages]);
+
+    // Get suggestions when input changes
+    useEffect(() => {
+        const getSuggestions = async () => {
+            if (inputMessage.trim().length > 3) { // Only get suggestions after 3 characters
+                try {
+                    const response = await fetch(`${serverUrl}/suggest`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            partial_message: inputMessage
+                        }),
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        setSuggestions(data.suggestions);
+                        setShowSuggestions(true);
+                    }
+                } catch (error) {
+                    console.error('Error getting suggestions:', error);
+                }
+            } else {
+                setSuggestions([]);
+                setShowSuggestions(false);
+            }
+        };
+
+        const debounceTimer = setTimeout(getSuggestions, 300); // Debounce API calls
+        return () => clearTimeout(debounceTimer);
+    }, [inputMessage]);
 
     // Add language detection function
     const detectLanguage = (text) => {
@@ -106,7 +140,7 @@ const ChatMessages = ({ pastConversation = [], setCurrentView, isHistory = false
     // Handle suggestion click
     const handleSuggestionClick = (suggestion) => {
         setInputMessage(suggestion);
-        setShowSuggestions(false);  // Hide suggestions when a suggestion is clicked
+        setShowSuggestions(false);
     };
 
     // Speech recognition function
@@ -150,10 +184,17 @@ const ChatMessages = ({ pastConversation = [], setCurrentView, isHistory = false
             {/* Main chat container with proper spacing */}
             <div className="flex-1 overflow-y-auto scrollbar-none w-full relative pb-16"> {/* Added pb-16 for input bar space */}
                 {/* Suggestions section */}
-                {showSuggestions && messages.length === 0 && (
-                    <div className="p-4">
-                        <h3 className="text-lg font-medium mb-2">Suggestions:</h3>
-                        <PromptSuggestions onSelectPrompt={handleSuggestionClick} />
+                {showSuggestions && suggestions.length > 0 && (
+                    <div className="absolute bottom-full left-0 right-0 bg-[#272626] rounded-t-lg p-2 border-t border-[#363636]">
+                        {suggestions.map((suggestion, index) => (
+                            <button
+                                key={index}
+                                className="w-full text-left px-3 py-2 hover:bg-[#363636] rounded"
+                                onClick={() => handleSuggestionClick(suggestion)}
+                            >
+                                {suggestion}
+                            </button>
+                        ))}
                     </div>
                 )}
                 
