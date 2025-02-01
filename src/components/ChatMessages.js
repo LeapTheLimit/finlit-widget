@@ -22,17 +22,17 @@ const ChatMessages = ({ pastConversation = [], setCurrentView, isHistory = false
 
     useEffect(scrollToBottom, [messages]);
 
-    // Detect language based on the input text
+    // Add language detection function
     const detectLanguage = (text) => {
         const arabicRegex = /[\u0600-\u06FF]/;
         const hebrewRegex = /[\u0590-\u05FF]/;
+        
         if (arabicRegex.test(text)) {
             return 'ar';
         } else if (hebrewRegex.test(text)) {
             return 'he';
-        } else {
-            return 'en';  // Default to English
         }
+        return 'en';
     };
 
     // Send message to the server and update state with the response
@@ -41,12 +41,11 @@ const ChatMessages = ({ pastConversation = [], setCurrentView, isHistory = false
             const newUserMessage = { text: inputMessage, sender: 'user' };
             setMessages([...messages, newUserMessage]);
             setInputMessage('');
-            setShowSuggestions(false);  // Hide suggestions after the first message
+            setShowSuggestions(false);
 
-            const detectedLanguage = detectLanguage(inputMessage);  // Detect language
+            const detectedLanguage = detectLanguage(inputMessage);
 
             try {
-                // Send user message to API
                 const response = await fetch(`${serverUrl}/chat`, {
                     method: 'POST',
                     headers: {
@@ -54,7 +53,7 @@ const ChatMessages = ({ pastConversation = [], setCurrentView, isHistory = false
                     },
                     body: JSON.stringify({
                         message: inputMessage,
-                        language: detectedLanguage,
+                        language: detectedLanguage  // Send detected language
                     }),
                 });
 
