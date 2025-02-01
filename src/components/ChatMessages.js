@@ -26,7 +26,7 @@ const ChatMessages = ({ pastConversation = [], setCurrentView, isHistory = false
     // Get suggestions when input changes
     useEffect(() => {
         const getSuggestions = async () => {
-            if (inputMessage.trim().length > 3) { // Only get suggestions after 3 characters
+            if (inputMessage.trim().length > 2) {
                 try {
                     const response = await fetch(`${serverUrl}/suggest`, {
                         method: 'POST',
@@ -34,17 +34,22 @@ const ChatMessages = ({ pastConversation = [], setCurrentView, isHistory = false
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            partial_message: inputMessage
+                            partial_message: inputMessage.trim()
                         }),
                     });
 
                     if (response.ok) {
                         const data = await response.json();
-                        setSuggestions(data.suggestions);
-                        setShowSuggestions(true);
+                        if (data.suggestions?.length > 0) {
+                            setSuggestions(data.suggestions);
+                            setShowSuggestions(true);
+                        } else {
+                            setShowSuggestions(false);
+                        }
                     }
                 } catch (error) {
                     console.error('Error getting suggestions:', error);
+                    setShowSuggestions(false);
                 }
             } else {
                 setSuggestions([]);
@@ -52,7 +57,7 @@ const ChatMessages = ({ pastConversation = [], setCurrentView, isHistory = false
             }
         };
 
-        const debounceTimer = setTimeout(getSuggestions, 300); // Debounce API calls
+        const debounceTimer = setTimeout(getSuggestions, 300);
         return () => clearTimeout(debounceTimer);
     }, [inputMessage]);
 
@@ -222,6 +227,20 @@ const ChatMessages = ({ pastConversation = [], setCurrentView, isHistory = false
 
             {/* Input bar fixed at bottom */}
             <div className="absolute bottom-4 left-0 right-0 px-4">
+                {showSuggestions && suggestions.length > 0 && (
+                    <div className="mb-2 space-y-1">
+                        {suggestions.map((suggestion, index) => (
+                            <button
+                                key={index}
+                                className="w-full text-left px-4 py-2 bg-[#272626] hover:bg-[#363636] 
+                                         rounded-lg text-white text-sm transition-colors"
+                                onClick={() => handleSuggestionClick(suggestion)}
+                            >
+                                {suggestion}
+                            </button>
+                        ))}
+                    </div>
+                )}
                 <div className="bg-white rounded-xl p-1 flex items-center">
                     <button className="p-2" onClick={startSpeechRecognition}>
                         {listening ? (
