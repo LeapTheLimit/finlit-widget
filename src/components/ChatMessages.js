@@ -26,7 +26,8 @@ const ChatMessages = ({ pastConversation = [], setCurrentView, isHistory = false
     // Get suggestions when input changes
     useEffect(() => {
         const getSuggestions = async () => {
-            if (inputMessage.trim().length > 2) {
+            // Only fetch suggestions if there's actual input and user is actively typing
+            if (inputMessage.trim().length > 2 && !messages.length) {
                 try {
                     const response = await fetch(`${serverUrl}/suggest`, {
                         method: 'POST',
@@ -59,7 +60,7 @@ const ChatMessages = ({ pastConversation = [], setCurrentView, isHistory = false
 
         const debounceTimer = setTimeout(getSuggestions, 300);
         return () => clearTimeout(debounceTimer);
-    }, [inputMessage]);
+    }, [inputMessage, messages.length]); // Added messages.length to dependencies
 
     // Add language detection function
     const detectLanguage = (text) => {
@@ -77,10 +78,11 @@ const ChatMessages = ({ pastConversation = [], setCurrentView, isHistory = false
     // Send message to the server and update state with the response
     const handleSend = async () => {
         if (inputMessage.trim()) {
+            setShowSuggestions(false); // Hide suggestions when sending
+            setSuggestions([]); // Clear suggestions array
             const newUserMessage = { text: inputMessage, sender: 'user' };
             setMessages([...messages, newUserMessage]);
             setInputMessage('');
-            setShowSuggestions(false);
 
             const detectedLanguage = detectLanguage(inputMessage);
 
@@ -227,7 +229,7 @@ const ChatMessages = ({ pastConversation = [], setCurrentView, isHistory = false
 
             {/* Input bar fixed at bottom */}
             <div className="absolute bottom-4 left-0 right-0 px-4">
-                {showSuggestions && suggestions.length > 0 && (
+                {showSuggestions && suggestions.length > 0 && !messages.length && (
                     <div className="mb-2 space-y-1">
                         {suggestions.map((suggestion, index) => (
                             <button
