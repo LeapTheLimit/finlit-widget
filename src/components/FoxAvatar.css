@@ -6,18 +6,132 @@
   transition: all 100ms ease-in;
 }
 
-.fox-wrapper {
-  position: relative;
-  height: 180px;
+.fox-container {
   width: 180px;
-  transform: scale(0.8);
+  height: 180px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .fox {
-  position: absolute;
-  width: 180px;
+  position: relative;
+  width: 150px;
   height: 150px;
-  z-index: 21;
+}
+
+.fox .head {
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  width: 50%;
+  height: 35%;
+  background: #FA730E;
+  border-radius: 50%;
+  border-top: 5px solid #ED6904;
+  z-index: 3;
+}
+
+/* White side fluff */
+.fox .head::before,
+.fox .head::after {
+  content: '';
+  position: absolute;
+  bottom: 2%;
+  width: 60%;
+  height: 35%;
+  background: #FCEFE0;
+  border-radius: 50%;
+}
+
+.fox .head::before {
+  transform: rotate(25deg);
+}
+
+.fox .head::after {
+  right: 0;
+  transform: rotate(-25deg);
+}
+
+/* Eyes */
+.fox .eyes {
+  position: absolute;
+  top: 55%;
+  width: 100%;
+  height: 30%;
+  z-index: 4;
+}
+
+.fox .eye {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #444;
+  border-radius: 50%;
+}
+
+.fox .eye::before {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+}
+
+.fox .eye.left {
+  left: 30%;
+}
+
+.fox .eye.right {
+  right: 30%;
+}
+
+/* Ears */
+.fox .ears {
+  position: absolute;
+  top: 11%;
+  left: 26%;
+  width: 48%;
+  height: 40px;
+  background: #FCEFE0;
+  border: 5px solid #FA730E;
+  border-radius: 20% 20% 0 0;
+  z-index: 0;
+}
+
+/* Animations */
+@keyframes fox-talk {
+  0% { transform: scaleY(1); }
+  50% { transform: scaleY(1.1); }
+  100% { transform: scaleY(1); }
+}
+
+.fox-container.talking .head {
+  animation: fox-talk 0.3s infinite;
+}
+
+@keyframes ear-wiggle {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.fox-container.listening .ears {
+  animation: ear-wiggle 1s infinite;
+}
+
+/* Eye blink animation */
+@keyframes blink {
+  0%, 90%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+
+.fox .eye {
+  animation: blink 4s infinite;
 }
 
 /* Head */
