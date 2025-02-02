@@ -31,17 +31,9 @@
   z-index: 2;
 }
 
-/* Add fur texture */
+/* Remove the before element that was creating the line */
 .fox__head:before {
-  content: '';
-  position: absolute;
-  top: -5px;
-  left: 0;
-  width: 100%;
-  height: 15px;
-  background: #C736D9;
-  border-radius: 50% 50% 0 0;
-  filter: brightness(95%);
+  display: none;
 }
 
 /* Ears */
@@ -116,33 +108,33 @@
 /* White face parts - aligned and fixed */
 .fox__cheek {
   position: absolute;
-  width: 45px; /* Made consistent */
-  height: 45px; /* Made consistent */
+  width: 48px; /* Slightly wider */
+  height: 48px; /* Slightly taller */
   background-color: white;
-  top: 65px; /* Aligned vertically */
+  top: 65px;
   z-index: 3;
 }
 
 .fox__cheek--left {
-  left: 15px;
-  transform: rotate(-5deg); /* Reduced rotation */
-  border-radius: 0 20px 0 20px;
+  left: 12px;
+  transform: rotate(-10deg);
+  border-radius: 5px 25px 5px 25px; /* More angular fox-like shape */
 }
 
 .fox__cheek--right {
-  right: 15px;
-  transform: rotate(5deg); /* Reduced rotation */
-  border-radius: 20px 0 20px 0;
+  right: 12px;
+  transform: rotate(10deg);
+  border-radius: 25px 5px 25px 5px; /* More angular fox-like shape */
 }
 
-/* Add fur texture to cheeks */
+/* Update cheek texture */
 .fox__cheek:before {
   content: '';
   position: absolute;
-  top: 5px;
-  left: 5px;
-  right: 5px;
-  bottom: 5px;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
   background: white;
   border-radius: inherit;
   filter: brightness(98%);
