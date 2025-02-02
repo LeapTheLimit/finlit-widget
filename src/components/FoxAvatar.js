@@ -5,17 +5,25 @@ const FoxAvatar = ({ isSpeaking, isListening }) => {
   return (
     <div className={`fox-container ${isListening ? 'listening' : ''} ${isSpeaking ? 'talking' : ''}`}>
       <div className="fox">
-        <div className="head">
+        {/* White ear triangles */}
+        <div className="ear left"></div>
+        <div className="ear right"></div>
+        
+        {/* Main orange face */}
+        <div className="face">
+          {/* Eyes */}
           <div className="eyes">
             <div className="eye left"></div>
             <div className="eye right"></div>
           </div>
-          <div className="sides">
-            <div className="left"></div>
-            <div className="right"></div>
-          </div>
+          
+          {/* Nose */}
+          <div className="nose"></div>
+          
+          {/* White cheek patches */}
+          <div className="cheek left"></div>
+          <div className="cheek right"></div>
         </div>
-        <div className="ears"></div>
       </div>
     </div>
   );
