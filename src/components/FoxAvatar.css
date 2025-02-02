@@ -105,39 +105,33 @@
   border-radius: 50%;
 }
 
-/* White face parts - aligned and fixed */
+/* White face parts - fox-like shape */
 .fox__cheek {
   position: absolute;
-  width: 48px; /* Slightly wider */
-  height: 48px; /* Slightly taller */
+  width: 55px;
+  height: 55px;
   background-color: white;
-  top: 65px;
+  top: 60px;
   z-index: 3;
 }
 
 .fox__cheek--left {
-  left: 12px;
-  transform: rotate(-10deg);
-  border-radius: 5px 25px 5px 25px; /* More angular fox-like shape */
+  left: 8px;
+  transform: rotate(-15deg) skew(-10deg);
+  border-radius: 60% 40% 40% 30%;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 30% 100%);
 }
 
 .fox__cheek--right {
-  right: 12px;
-  transform: rotate(10deg);
-  border-radius: 25px 5px 25px 5px; /* More angular fox-like shape */
+  right: 8px;
+  transform: rotate(15deg) skew(10deg);
+  border-radius: 40% 60% 30% 40%;
+  clip-path: polygon(0 0, 100% 0, 70% 100%, 0 100%);
 }
 
-/* Update cheek texture */
+/* Remove the cheek texture since it's not needed for this style */
 .fox__cheek:before {
-  content: '';
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  right: 4px;
-  bottom: 4px;
-  background: white;
-  border-radius: inherit;
-  filter: brightness(98%);
+  display: none;
 }
 
 /* Nose - moved up */
