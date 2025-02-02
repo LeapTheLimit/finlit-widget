@@ -24,59 +24,72 @@
 .fox {
   width: 120px;
   height: 120px;
-  background: #C736D9;  /* Purple color */
+  background: #C736D9;
   border-radius: 50%;
   position: relative;
   overflow: hidden;
 }
 
-/* Updated cheeks/sides */
+/* Remove the line between ears by removing border-top */
+.fox__head {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+}
+
+/* Adjust white sides to match the image */
 .fox__cheek {
   width: 45px;
   height: 45px;
-  background: #fff;
+  background: white;
   position: absolute;
-  border-radius: 50%;
   top: 50%;
+  border-radius: 50%;
+  z-index: 1;
 }
 
 .fox__cheek--left {
   left: -5px;
+  transform: translateY(-50%);
 }
 
 .fox__cheek--right {
   right: -5px;
+  transform: translateY(-50%);
 }
 
-/* Updated ears without the line */
+/* Keep existing ear styles but remove any top borders */
 .fox__ear {
-  width: 35px;
-  height: 35px;
-  background: #C736D9;
+  width: 0;
+  height: 0;
   position: absolute;
-  top: 0;
+  top: -15px;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-bottom: 40px solid #C736D9;
+  z-index: 0;
 }
 
 .fox__ear--left {
-  left: 15px;
-  transform: rotate(-30deg);
-  border-radius: 50% 0 0 0;
+  left: 10px;
+  transform: rotate(-10deg);
 }
 
 .fox__ear--right {
-  right: 15px;
-  transform: rotate(30deg);
-  border-radius: 0 50% 0 0;
+  right: 10px;
+  transform: rotate(10deg);
 }
 
-/* Eyes */
+/* Keep all other existing styles the same */
 .fox__eye {
-  width: 24px;
-  height: 24px;
-  background: #000;
+  width: 12px;
+  height: 12px;
+  background: black;
   position: absolute;
   border-radius: 50%;
   top: 45px;
+  animation: blink 4s infinite;
 }
 
 .fox__eye--left {
@@ -87,60 +100,166 @@
   right: 30px;
 }
 
-/* Nose */
 .fox__nose {
-  width: 14px;
-  height: 10px;
-  background: #000;
+  width: 12px;
+  height: 8px;
+  background: black;
   position: absolute;
-  top: 65px;
+  border-radius: 50%;
+  top: 60px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.fox__mouth {
+  width: 16px;
+  height: 8px;
+  border: 2px solid black;
+  border-top: 0;
+  border-radius: 0 0 50% 50%;
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Keep existing animations */
+@keyframes blink {
+  0%, 96%, 98% {
+    transform: scaleY(1);
+  }
+  97% {
+    transform: scaleY(0.1);
+  }
+}
+
+.fox.talking .fox__mouth {
+  animation: talk 0.2s infinite;
+}
+
+@keyframes talk {
+  0% { height: 8px; }
+  50% { height: 12px; }
+  100% { height: 8px; }
+}
+
+/* Add eye shine */
+.fox__eye:after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 6px;
+  height: 6px;
+  background: white;
   border-radius: 50%;
 }
 
-/* Mouth */
-.fox__mouth {
-  width: 20px;
-  height: 10px;
-  border: 2px solid #000;
-  border-radius: 0 0 20px 20px;
-  border-top: 0;
+/* Add fur texture to cheeks */
+.fox__cheek:before {
+  content: '';
   position: absolute;
-  top: 75px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  background: white;
+  border-radius: inherit;
+  filter: brightness(98%);
 }
 
-/* Animations */
+/* Nose - moved up */
+.fox__nose {
+  position: absolute;
+  top: 82px; /* Moved up from 87px */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px; /* Slightly smaller */
+  height: 8px; /* Slightly smaller */
+  border-radius: 50%;
+  background-color: #000;
+  z-index: 4;
+}
+
+/* Mouth - moved down */
+.fox__mouth {
+  position: absolute;
+  top: 98px; /* Moved down from 95px */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 10px;
+  background-color: black;
+  border-radius: 0 0 50% 50%;
+  z-index: 4;
+  transition: all 0.2s ease;
+}
+
+/* Updated talking animation for mouth */
 @keyframes fox-talk {
-  0% { height: 10px; }
-  50% { height: 15px; }
-  100% { height: 10px; }
+  0% {
+    height: 10px;
+    border-radius: 0 0 50% 50%;
+  }
+  50% {
+    height: 16px;
+    border-radius: 50%;
+  }
+  100% {
+    height: 10px;
+    border-radius: 0 0 50% 50%;
+  }
 }
 
 .fox.talking .fox__mouth {
   animation: fox-talk 0.3s infinite;
 }
 
-@keyframes fox-ear {
-  0% { transform: rotate(-30deg); }
-  50% { transform: rotate(-35deg); }
-  100% { transform: rotate(-30deg); }
+/* Listening state mouth */
+.fox-container.listening .fox__mouth {
+  height: 12px;
+  border-radius: 0 0 50% 50%;
 }
 
-.fox-container.listening .fox__ear--left {
-  animation: fox-ear 1s infinite;
+/* Talking animations */
+.fox.talking .fox__ear--left {
+  animation: ear-left 0.3s infinite alternate;
 }
 
-.fox-container.listening .fox__ear--right {
-  animation: fox-ear-right 1s infinite;
+.fox.talking .fox__ear--right {
+  animation: ear-right 0.3s infinite alternate;
 }
 
-@keyframes fox-ear-right {
-  0% { transform: rotate(30deg); }
-  50% { transform: rotate(35deg); }
-  100% { transform: rotate(30deg); }
+@keyframes ear-left {
+  to {
+    transform: rotate(-10deg);
+  }
+}
+
+@keyframes ear-right {
+  to {
+    transform: rotate(10deg);
+  }
+}
+
+/* Add listening animations */
+.fox-container.listening .ear {
+  animation: ear-twitch 1s infinite;
+}
+
+.fox-container.listening .ear.right {
+  animation-delay: 0.5s;
+}
+
+@keyframes ear-twitch {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(-15deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Only move mouth during talking */
+.fox-container.talking .mouth {
+  animation: fox-talk 0.3s infinite alternate;
 }
 
 /* Add subtle fur movement animation */
