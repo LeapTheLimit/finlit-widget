@@ -6,28 +6,18 @@
   transition: all 100ms ease-in;
 }
 
-.fox-container {
-  width: 180px;
-  height: 180px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .fox-wrapper {
-  width: 120px;
-  height: 120px;
   position: relative;
+  height: 180px;
+  width: 180px;
+  transform: scale(0.8);
 }
 
 .fox {
-  width: 120px;
-  height: 120px;
-  background: #E9E9EB;
-  border-radius: 50%;
-  position: relative;
-  overflow: hidden;
+  position: absolute;
+  width: 180px;
+  height: 150px;
+  z-index: 21;
 }
 
 /* Head */
@@ -56,23 +46,26 @@
 
 /* Ears */
 .fox__ear {
-  width: 0;
-  height: 0;
   position: absolute;
-  top: -10px;
-  border-bottom: 35px solid #E9E9EB;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
+  height: 68px;
+  width: 42px;
+  top: -22px;
+  background-color: #C736D9;
+  z-index: 1;
 }
 
 .fox__ear--left {
-  left: 15px;
-  transform: rotate(-15deg);
+  border-radius: 10px 80px 0 0;
+  left: 18px;
+  transform: rotate(-5deg);
+  transform-origin: bottom;
 }
 
 .fox__ear--right {
-  right: 15px;
-  transform: rotate(15deg);
+  border-radius: 80px 10px 0 0;
+  right: 18px;
+  transform: rotate(5deg);
+  transform-origin: bottom;
 }
 
 /* Add inner ear detail */
@@ -90,20 +83,22 @@
 
 /* Eyes */
 .fox__eye {
-  width: 24px;
-  height: 24px;
-  background: #000;
   position: absolute;
+  height: 18px;
+  width: 18px;
+  top: 60px;
   border-radius: 50%;
-  top: 45px;
+  background-color: #000;
+  z-index: 5;
+  animation: fox-blink 4s linear infinite;
 }
 
 .fox__eye--left {
-  left: 30px;
+  left: 45px;
 }
 
 .fox__eye--right {
-  right: 30px;
+  right: 45px;
 }
 
 /* Add eye shine */
@@ -155,27 +150,29 @@
 
 /* Nose - moved up */
 .fox__nose {
-  width: 14px;
-  height: 14px;
-  background: #000;
   position: absolute;
-  border-radius: 50%;
-  top: 70px;
+  top: 82px; /* Moved up from 87px */
   left: 50%;
   transform: translateX(-50%);
+  width: 14px; /* Slightly smaller */
+  height: 8px; /* Slightly smaller */
+  border-radius: 50%;
+  background-color: #000;
+  z-index: 4;
 }
 
 /* Mouth - moved down */
 .fox__mouth {
-  width: 30px;
-  height: 15px;
-  border: none;
-  border-bottom: 2px solid #000;
   position: absolute;
-  bottom: 25px;
+  top: 98px; /* Moved down from 95px */
   left: 50%;
   transform: translateX(-50%);
+  width: 16px;
+  height: 10px;
+  background-color: black;
   border-radius: 0 0 50% 50%;
+  z-index: 4;
+  transition: all 0.2s ease;
 }
 
 /* Animations */
