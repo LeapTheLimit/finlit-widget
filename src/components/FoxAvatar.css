@@ -438,17 +438,11 @@
 
 /* Updated talking animation for mouth */
 @keyframes fox-talk {
-  0% {
-    height: 10px;
-    border-radius: 0 0 50% 50%;
+  0%, 100% { 
+    transform: translateX(-50%) scaleY(1);
   }
-  50% {
-    height: 16px;
-    border-radius: 50%;
-  }
-  100% {
-    height: 10px;
-    border-radius: 0 0 50% 50%;
+  50% { 
+    transform: translateX(-50%) scaleY(0.5);
   }
 }
 
@@ -500,7 +494,7 @@
 
 /* Only move mouth during talking */
 .fox-container.talking .mouth {
-  animation: fox-talk 0.3s infinite alternate;
+  animation: fox-talk 0.3s infinite;
 }
 
 /* Add subtle fur movement animation */
@@ -519,4 +513,30 @@
 
 .fox__cheek--right {
   animation-delay: 1.5s;
+}
+
+/* Add mouth styles */
+.mouth {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 5px;
+  background: var(--black);
+  border-radius: 5px;
+}
+
+/* Update talk animation for mouth */
+@keyframes fox-talk {
+  0%, 100% { 
+    transform: translateX(-50%) scaleY(1);
+  }
+  50% { 
+    transform: translateX(-50%) scaleY(0.5);
+  }
+}
+
+.fox-container.talking .mouth {
+  animation: fox-talk 0.3s infinite;
 } 

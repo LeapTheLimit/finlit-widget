@@ -14,6 +14,7 @@ const FoxAvatar = ({ isSpeaking, isListening }) => {
             <div className="eye left"></div>
             <div className="eye right"></div>
           </div>
+          <div className="mouth"></div>
         </div>
         <div className="ears"></div>
       </div>
