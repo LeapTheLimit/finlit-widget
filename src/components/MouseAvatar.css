@@ -1,0 +1,192 @@
+.mouse-container {
+  width: 180px;
+  height: 180px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mouse {
+  width: 120px;
+  height: 120px;
+  position: relative;
+}
+
+.mouse .face {
+  width: 120px;
+  height: 120px;
+  background: #808080;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+.mouse .chef-hat {
+  width: 80px;
+  height: 60px;
+  background: white;
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 40px 40px 0 0;
+  z-index: 2;
+}
+
+.mouse .hat-band {
+  width: 100%;
+  height: 15px;
+  background: #eee;
+  position: absolute;
+  bottom: 0;
+  border-radius: 0 0 10px 10px;
+}
+
+.mouse .ear {
+  width: 35px;
+  height: 35px;
+  background: #808080;
+  position: absolute;
+  border-radius: 50%;
+  top: -15px;
+  z-index: 1;
+}
+
+.mouse .ear.left {
+  left: 10px;
+}
+
+.mouse .ear.right {
+  right: 10px;
+}
+
+.mouse .eyes-container {
+  position: absolute;
+  top: 45px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.mouse .eye {
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 50%;
+  position: relative;
+}
+
+.mouse .eye-inner {
+  width: 16px;
+  height: 16px;
+  background: #4d3900;
+  border-radius: 50%;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+}
+
+.mouse .eye-shine {
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+
+.mouse .nose {
+  width: 14px;
+  height: 10px;
+  background: #ffb6c1;
+  position: absolute;
+  top: 75px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 30% 30% 60% 60%;
+}
+
+.mouse .whiskers-container {
+  position: absolute;
+  width: 100%;
+  top: 70px;
+}
+
+.mouse .whisker {
+  width: 35px;
+  height: 1.5px;
+  background: #666;
+  position: absolute;
+}
+
+.mouse .whisker.left-top {
+  left: 5px;
+  transform: rotate(-10deg);
+}
+
+.mouse .whisker.left-mid {
+  left: 3px;
+  top: 8px;
+}
+
+.mouse .whisker.left-bottom {
+  left: 5px;
+  top: 16px;
+  transform: rotate(10deg);
+}
+
+.mouse .whisker.right-top {
+  right: 5px;
+  transform: rotate(10deg);
+}
+
+.mouse .whisker.right-mid {
+  right: 3px;
+  top: 8px;
+}
+
+.mouse .whisker.right-bottom {
+  right: 5px;
+  top: 16px;
+  transform: rotate(-10deg);
+}
+
+.mouse .mouth {
+  width: 30px;
+  height: 15px;
+  background: transparent;
+  border-bottom: 2px solid #666;
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 0 0 50% 50%;
+}
+
+/* Animations */
+@keyframes mouse-talk {
+  0% { height: 15px; }
+  50% { height: 20px; }
+  100% { height: 15px; }
+}
+
+.mouse-container.talking .mouth {
+  animation: mouse-talk 0.3s infinite;
+}
+
+@keyframes ear-wiggle {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.mouse-container.listening .ear {
+  animation: ear-wiggle 1s infinite;
+}
+
+.mouse-container.listening .ear.right {
+  animation-delay: 0.5s;
+} 
