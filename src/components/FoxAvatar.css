@@ -18,18 +18,122 @@
 .fox-container {
   width: 180px;
   height: 180px;
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .fox {
+  width: 120px;
+  height: 120px;
   position: relative;
-  top: 15%;
-  margin: auto;
-  height: 150px;
-  width: 150px;
+}
+
+.fox-face {
+  width: 100%;
+  height: 100%;
+  background: #FA730E;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ears */
+.fox-ears {
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+
+.ear {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #FA730E;
+}
+
+.ear.left {
+  left: 10px;
+  transform: rotate(-45deg);
+}
+
+.ear.right {
+  right: 10px;
+  transform: rotate(45deg);
+}
+
+/* Eyes */
+.eyes {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 20px;
+}
+
+.eye {
+  width: 20px;
+  height: 20px;
+  background: #444;
+  border-radius: 50%;
+}
+
+/* Nose */
+.nose {
+  position: absolute;
+  bottom: 35%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 15px;
+  height: 15px;
+  background: #000;
+  border-radius: 50%;
+}
+
+/* White cheeks */
+.cheeks {
+  position: absolute;
+  bottom: 20%;
+  width: 100%;
+}
+
+.cheek {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: #FCEFE0;
+}
+
+.cheek.left {
+  left: -5px;
+  transform: rotate(45deg);
+}
+
+.cheek.right {
+  right: -5px;
+  transform: rotate(-45deg);
+}
+
+/* Animations */
+@keyframes blink {
+  0%, 90%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+
+.fox .eye {
+  animation: blink 4s infinite;
+}
+
+.fox-container.talking .nose {
+  animation: talk 0.3s infinite;
+}
+
+@keyframes talk {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.2); }
 }
 
 /* Head */
@@ -116,55 +220,6 @@
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
   transform: rotate(20deg);
-}
-
-/* Eyes */
-.fox .eyes {
-  position: absolute;
-  top: 55%;
-  height: 30%;
-  width: 100%;
-  z-index: 4;
-}
-
-.fox .eye {
-  position: absolute;
-  height: 12px;
-  width: 12px;
-  background: var(--black);
-  border-radius: 50%;
-}
-
-.fox .eye::before {
-  content: '';
-  position: absolute;
-  top: 1px;
-  left: 1px;
-  height: 4px;
-  width: 4px;
-  background: #fff;
-  border-radius: 50%;
-}
-
-.fox .eye.left {
-  left: 30%;
-}
-
-.fox .eye.right {
-  right: 30%;
-}
-
-/* Ears */
-.fox .ears {
-  position: absolute;
-  top: 11%;
-  left: calc((100% - 48%)/2);
-  height: 40px;
-  width: 48%;
-  background: var(--white);
-  border: 5px solid var(--orange);
-  border-radius: 20% 20% 0 0;
-  z-index: 0;
 }
 
 /* Animations */

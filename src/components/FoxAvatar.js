@@ -5,19 +5,20 @@ const FoxAvatar = ({ isSpeaking, isListening }) => {
   return (
     <div className={`fox-container ${isListening ? 'listening' : ''} ${isSpeaking ? 'talking' : ''}`}>
       <div className="fox">
-        <div className="head">
+        <div className="fox-face">
+          <div className="fox-ears">
+            <div className="ear left"></div>
+            <div className="ear right"></div>
+          </div>
           <div className="eyes">
             <div className="eye left"></div>
             <div className="eye right"></div>
           </div>
-          <div className="sides">
-            <div className="left"></div>
-            <div className="right"></div>
+          <div className="nose"></div>
+          <div className="cheeks">
+            <div className="cheek left"></div>
+            <div className="cheek right"></div>
           </div>
-        </div>
-        <div className="ears">
-          <div className="ear left"></div>
-          <div className="ear right"></div>
         </div>
       </div>
     </div>
