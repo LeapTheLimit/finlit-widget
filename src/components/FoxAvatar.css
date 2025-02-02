@@ -15,132 +15,103 @@
   justify-content: center;
 }
 
-.fox-wrapper {
+.fox {
   width: 120px;
   height: 120px;
   position: relative;
-}
-
-.fox {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.fox__head {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: #ff7043;
+  background: #C736D9;
   border-radius: 50%;
-  z-index: 2;
 }
 
-.fox__face {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.fox__eye {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  background: #000;
-  border-radius: 50%;
-  top: 45%;
-}
-
-.fox__eye--left {
-  left: 25%;
-}
-
-.fox__eye--right {
-  right: 25%;
-}
-
-.fox__eye::after {
+/* White side patches */
+.fox::before,
+.fox::after {
   content: '';
   position: absolute;
-  width: 4px;
-  height: 4px;
+  width: 45%;
+  height: 65%;
   background: white;
   border-radius: 50%;
-  top: 2px;
-  right: 2px;
-}
-
-.fox__nose {
-  position: absolute;
-  width: 14px;
-  height: 8px;
-  background: #000;
-  border-radius: 40% 40% 60% 60%;
-  top: 58%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.fox__mouth {
-  position: absolute;
-  width: 20px;
-  height: 8px;
-  border-bottom: 2px solid #000;
-  border-radius: 0 0 50% 50%;
-  top: 65%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.fox__side {
-  position: absolute;
-  width: 35%;
-  height: 60%;
-  background: white;
-  bottom: 2%;
-  border-radius: 50%;
+  bottom: 5%;
   z-index: 1;
 }
 
-.fox__side--left {
+.fox::before {
   left: -10%;
   transform: rotate(25deg);
 }
 
-.fox__side--right {
+.fox::after {
   right: -10%;
   transform: rotate(-25deg);
 }
 
-.fox__ear {
+/* Eyes */
+.fox .eye {
+  width: 24px;
+  height: 24px;
+  background: black;
+  border-radius: 50%;
   position: absolute;
-  width: 45%;
-  height: 40%;
-  background: #ff7043;
-  border-radius: 50% 50% 0 0;
-  top: -15%;
+  top: 35%;
+  z-index: 2;
+}
+
+.fox .eye.left {
+  left: 25%;
+}
+
+.fox .eye.right {
+  right: 25%;
+}
+
+/* Ears */
+.fox .ear {
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: -15px;
+  border-bottom: 35px solid #C736D9;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
   z-index: 1;
 }
 
-.fox__ear--left {
-  left: 5%;
+.fox .ear.left {
+  left: 15px;
   transform: rotate(-15deg);
 }
 
-.fox__ear--right {
-  right: 5%;
+.fox .ear.right {
+  right: 15px;
   transform: rotate(15deg);
 }
 
-.fox__ear::before {
-  content: '';
+/* Nose */
+.fox .nose {
+  width: 12px;
+  height: 8px;
+  background: black;
+  border-radius: 50%;
   position: absolute;
-  width: 60%;
-  height: 60%;
-  background: white;
-  border-radius: inherit;
-  top: 20%;
-  left: 20%;
+  top: 55%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+/* Mouth */
+.fox .mouth {
+  width: 16px;
+  height: 8px;
+  border: none;
+  border-bottom: 2px solid black;
+  border-radius: 0 0 50% 50%;
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
 }
 
 /* Animations */
@@ -150,105 +121,28 @@
   100% { height: 8px; }
 }
 
-.fox.talking .fox__mouth {
+.fox.talking .mouth {
   animation: fox-talk 0.3s infinite;
 }
 
-@keyframes ear-wiggle {
+@keyframes fox-ear-wiggle {
   0% { transform: rotate(-15deg); }
   50% { transform: rotate(-20deg); }
   100% { transform: rotate(-15deg); }
 }
 
-.fox-container.listening .fox__ear--left {
-  animation: ear-wiggle 1s infinite;
-}
-
-.fox-container.listening .fox__ear--right {
-  animation: ear-wiggle-right 1s infinite;
-}
-
-@keyframes ear-wiggle-right {
-  0% { transform: rotate(15deg); }
-  50% { transform: rotate(20deg); }
-  100% { transform: rotate(15deg); }
-}
-
-/* Eye blink animation */
-@keyframes blink {
-  0%, 90%, 100% { transform: scaleY(1); }
-  95% { transform: scaleY(0.1); }
-}
-
-.fox__eye {
-  animation: blink 4s infinite;
-}
-
-/* Updated talking animation for mouth */
-@keyframes fox-talk {
-  0% {
-    height: 10px;
-    border-radius: 0 0 50% 50%;
-  }
-  50% {
-    height: 16px;
-    border-radius: 50%;
-  }
-  100% {
-    height: 10px;
-    border-radius: 0 0 50% 50%;
-  }
-}
-
-.fox.talking .fox__mouth {
-  animation: fox-talk 0.3s infinite;
-}
-
-/* Listening state mouth */
-.fox-container.listening .fox__mouth {
-  height: 12px;
-  border-radius: 0 0 50% 50%;
-}
-
-/* Talking animations */
-.fox.talking .fox__ear--left {
-  animation: ear-left 0.3s infinite alternate;
-}
-
-.fox.talking .fox__ear--right {
-  animation: ear-right 0.3s infinite alternate;
-}
-
-@keyframes ear-left {
-  to {
-    transform: rotate(-10deg);
-  }
-}
-
-@keyframes ear-right {
-  to {
-    transform: rotate(10deg);
-  }
-}
-
-/* Add listening animations */
-.fox-container.listening .ear {
-  animation: ear-twitch 1s infinite;
+.fox-container.listening .ear.left {
+  animation: fox-ear-wiggle 1s infinite;
 }
 
 .fox-container.listening .ear.right {
-  animation-delay: 0.5s;
+  animation: fox-ear-wiggle-right 1s infinite;
 }
 
-@keyframes ear-twitch {
-  0% { transform: rotate(0deg); }
-  50% { transform: rotate(-15deg); }
-  100% { transform: rotate(0deg); }
-}
-
-/* Only move mouth during talking */
-.fox-container.talking .mouth {
-  animation: fox-talk 0.3s infinite alternate;
+@keyframes fox-ear-wiggle-right {
+  0% { transform: rotate(15deg); }
+  50% { transform: rotate(20deg); }
+  100% { transform: rotate(15deg); }
 }
 
 /* Add subtle fur movement animation */
