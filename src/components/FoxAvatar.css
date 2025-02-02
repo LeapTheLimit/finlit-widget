@@ -6,183 +6,182 @@
   transition: all 100ms ease-in;
 }
 
-.fox-wrapper {
-  position: relative;
-  height: 180px;
+.fox-container {
   width: 180px;
-  transform: scale(0.8);
+  height: 180px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fox-wrapper {
+  width: 120px;
+  height: 120px;
+  position: relative;
 }
 
 .fox {
-  position: absolute;
-  width: 180px;
-  height: 150px;
-  z-index: 21;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
-/* Head */
 .fox__head {
   position: absolute;
-  width: 162px;
-  height: 120px;
-  background: #C736D9;
-  border-radius: 50% 50% 45% 45%;
-  left: 9px;
+  width: 100%;
+  height: 100%;
+  background: #ff7043;
+  border-radius: 50%;
   z-index: 2;
 }
 
-/* Add fur texture */
-.fox__head:before {
-  content: '';
-  position: absolute;
-  top: -5px;
-  left: 0;
+.fox__face {
+  position: relative;
   width: 100%;
-  height: 15px;
-  background: #C736D9;
-  border-radius: 50% 50% 0 0;
-  filter: brightness(95%);
+  height: 100%;
 }
 
-/* Ears */
+.fox__eye {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #000;
+  border-radius: 50%;
+  top: 45%;
+}
+
+.fox__eye--left {
+  left: 25%;
+}
+
+.fox__eye--right {
+  right: 25%;
+}
+
+.fox__eye::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  top: 2px;
+  right: 2px;
+}
+
+.fox__nose {
+  position: absolute;
+  width: 14px;
+  height: 8px;
+  background: #000;
+  border-radius: 40% 40% 60% 60%;
+  top: 58%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.fox__mouth {
+  position: absolute;
+  width: 20px;
+  height: 8px;
+  border-bottom: 2px solid #000;
+  border-radius: 0 0 50% 50%;
+  top: 65%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.fox__side {
+  position: absolute;
+  width: 35%;
+  height: 60%;
+  background: white;
+  bottom: 2%;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.fox__side--left {
+  left: -10%;
+  transform: rotate(25deg);
+}
+
+.fox__side--right {
+  right: -10%;
+  transform: rotate(-25deg);
+}
+
 .fox__ear {
   position: absolute;
-  height: 68px;
-  width: 42px;
-  top: -22px;
-  background-color: #C736D9;
+  width: 45%;
+  height: 40%;
+  background: #ff7043;
+  border-radius: 50% 50% 0 0;
+  top: -15%;
   z-index: 1;
 }
 
 .fox__ear--left {
-  border-radius: 10px 80px 0 0;
-  left: 18px;
-  transform: rotate(-5deg);
-  transform-origin: bottom;
+  left: 5%;
+  transform: rotate(-15deg);
 }
 
 .fox__ear--right {
-  border-radius: 80px 10px 0 0;
-  right: 18px;
-  transform: rotate(5deg);
-  transform-origin: bottom;
+  right: 5%;
+  transform: rotate(15deg);
 }
 
-/* Add inner ear detail */
-.fox__ear:after {
+.fox__ear::before {
   content: '';
   position: absolute;
-  top: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 24px;
-  height: 40px;
-  background: #b32ec3;
-  border-radius: 40px 40px 0 0;
-}
-
-/* Eyes */
-.fox__eye {
-  position: absolute;
-  height: 18px;
-  width: 18px;
-  top: 60px;
-  border-radius: 50%;
-  background-color: #000;
-  z-index: 5;
-  animation: fox-blink 4s linear infinite;
-}
-
-.fox__eye--left {
-  left: 45px;
-}
-
-.fox__eye--right {
-  right: 45px;
-}
-
-/* Add eye shine */
-.fox__eye:after {
-  content: '';
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  width: 6px;
-  height: 6px;
-  background: white;
-  border-radius: 50%;
-}
-
-/* White face parts - aligned and fixed */
-.fox__cheek {
-  position: absolute;
-  width: 45px; /* Made consistent */
-  height: 45px; /* Made consistent */
-  background-color: white;
-  top: 65px; /* Aligned vertically */
-  z-index: 3;
-}
-
-.fox__cheek--left {
-  left: 15px;
-  transform: rotate(-5deg); /* Reduced rotation */
-  border-radius: 0 20px 0 20px;
-}
-
-.fox__cheek--right {
-  right: 15px;
-  transform: rotate(5deg); /* Reduced rotation */
-  border-radius: 20px 0 20px 0;
-}
-
-/* Add fur texture to cheeks */
-.fox__cheek:before {
-  content: '';
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  right: 5px;
-  bottom: 5px;
+  width: 60%;
+  height: 60%;
   background: white;
   border-radius: inherit;
-  filter: brightness(98%);
-}
-
-/* Nose - moved up */
-.fox__nose {
-  position: absolute;
-  top: 82px; /* Moved up from 87px */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 14px; /* Slightly smaller */
-  height: 8px; /* Slightly smaller */
-  border-radius: 50%;
-  background-color: #000;
-  z-index: 4;
-}
-
-/* Mouth - moved down */
-.fox__mouth {
-  position: absolute;
-  top: 98px; /* Moved down from 95px */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 16px;
-  height: 10px;
-  background-color: black;
-  border-radius: 0 0 50% 50%;
-  z-index: 4;
-  transition: all 0.2s ease;
+  top: 20%;
+  left: 20%;
 }
 
 /* Animations */
-@keyframes fox-blink {
-  0%, 96%, 98% {
-    transform: scaleY(1);
-  }
-  97% {
-    transform: scaleY(0.1);
-  }
+@keyframes fox-talk {
+  0% { height: 8px; }
+  50% { height: 12px; }
+  100% { height: 8px; }
+}
+
+.fox.talking .fox__mouth {
+  animation: fox-talk 0.3s infinite;
+}
+
+@keyframes ear-wiggle {
+  0% { transform: rotate(-15deg); }
+  50% { transform: rotate(-20deg); }
+  100% { transform: rotate(-15deg); }
+}
+
+.fox-container.listening .fox__ear--left {
+  animation: ear-wiggle 1s infinite;
+}
+
+.fox-container.listening .fox__ear--right {
+  animation: ear-wiggle-right 1s infinite;
+}
+
+@keyframes ear-wiggle-right {
+  0% { transform: rotate(15deg); }
+  50% { transform: rotate(20deg); }
+  100% { transform: rotate(15deg); }
+}
+
+/* Eye blink animation */
+@keyframes blink {
+  0%, 90%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+
+.fox__eye {
+  animation: blink 4s infinite;
 }
 
 /* Updated talking animation for mouth */
