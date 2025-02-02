@@ -11,16 +11,6 @@ const CatAvatar = ({ isSpeaking, isListening }) => {
         <div className="eye right"></div>
         <div className="nose"></div>
         <div className="mouth"></div>
-        <div className="whiskers left">
-          <div className="whisker"></div>
-          <div className="whisker"></div>
-          <div className="whisker"></div>
-        </div>
-        <div className="whiskers right">
-          <div className="whisker"></div>
-          <div className="whisker"></div>
-          <div className="whisker"></div>
-        </div>
         <div className="pink left"></div>
         <div className="pink right"></div>
       </div>
