@@ -155,11 +155,11 @@
 }
 
 .mouse .mouth {
-  width: 16px;
+  width: 20px;
   height: 10px;
   background-color: #666;
   position: absolute;
-  bottom: 25px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   border-radius: 0 0 50% 50%;
@@ -173,6 +173,7 @@
   }
   50% {
     height: 16px;
+    width: 22px;
     border-radius: 50%;
   }
   100% {
