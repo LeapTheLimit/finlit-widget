@@ -136,42 +136,34 @@
 
 /* Updated mouth styling */
 .cat .mouth {
-  width: 20px;
-  height: 8px;
-  border: none;
+  width: 16px;
+  height: 10px;
+  background-color: black;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   top: 75px;
   z-index: 3;
-}
-
-.cat .mouth:before {
-  content: '';
-  position: absolute;
-  width: 20px;
-  height: 10px;
-  border: 2px solid #000;
   border-radius: 0 0 50% 50%;
-  border-top: 0;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 /* Fixed talking animation for the mouth */
 @keyframes cat-talk {
   0% {
-    transform: translateX(-50%) scaleY(1);
+    height: 10px;
+    border-radius: 0 0 50% 50%;
   }
   50% {
-    transform: translateX(-50%) scaleY(1.5);
+    height: 16px;
+    border-radius: 50%;
   }
   100% {
-    transform: translateX(-50%) scaleY(1);
+    height: 10px;
+    border-radius: 0 0 50% 50%;
   }
 }
 
-.cat.talking .mouth:before {
+.cat.talking .mouth {
   animation: cat-talk 0.3s infinite;
 }
 
