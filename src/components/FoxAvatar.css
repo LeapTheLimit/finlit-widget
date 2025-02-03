@@ -108,25 +108,23 @@
 /* White face parts - fox-like shape */
 .fox__cheek {
   position: absolute;
-  width: 55px;
-  height: 55px;
+  width: 60px;
+  height: 60px;
   background-color: white;
-  top: 60px;
+  top: 50px;
   z-index: 3;
 }
 
 .fox__cheek--left {
-  left: 8px;
-  transform: rotate(-15deg) skew(-10deg);
-  border-radius: 60% 40% 40% 30%;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 30% 100%);
+  left: 15px;
+  transform: rotate(-5deg);
+  border-radius: 50% 50% 50% 40%;
 }
 
 .fox__cheek--right {
-  right: 8px;
-  transform: rotate(15deg) skew(10deg);
-  border-radius: 40% 60% 30% 40%;
-  clip-path: polygon(0 0, 100% 0, 70% 100%, 0 100%);
+  right: 15px;
+  transform: rotate(5deg);
+  border-radius: 50% 50% 40% 50%;
 }
 
 /* Remove the cheek texture since it's not needed for this style */
