@@ -166,11 +166,22 @@
   border-radius: 0 0 50% 50%;
 }
 
-/* Animations */
+/* Fixed talking animation for mouth */
 @keyframes mouse-talk {
-  0% { height: 15px; }
-  50% { height: 20px; }
-  100% { height: 15px; }
+  0% {
+    height: 15px;
+    border-radius: 0 0 50% 50%;
+  }
+  50% {
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid #666;
+    border-top: none;
+  }
+  100% {
+    height: 15px;
+    border-radius: 0 0 50% 50%;
+  }
 }
 
 .mouse-container.talking .mouth {

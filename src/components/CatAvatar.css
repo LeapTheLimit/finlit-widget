@@ -146,7 +146,6 @@
   z-index: 3;
 }
 
-/* Create the cat smile */
 .cat .mouth:before {
   content: '';
   position: absolute;
@@ -159,17 +158,16 @@
   transform: translateX(-50%);
 }
 
-/* Talking animation for the mouth */
+/* Fixed talking animation for the mouth */
 @keyframes cat-talk {
   0% {
-    height: 10px;
+    transform: translateX(-50%) scaleY(1);
   }
   50% {
-    height: 15px;
-    border-radius: 45%;
+    transform: translateX(-50%) scaleY(1.5);
   }
   100% {
-    height: 10px;
+    transform: translateX(-50%) scaleY(1);
   }
 }
 
