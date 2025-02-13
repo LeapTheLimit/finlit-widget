@@ -18,10 +18,13 @@
     document.body.appendChild(widget);
     console.log('Container created');
 
+    // Base URL for assets
+    var baseUrl = 'https://leapthelimit.github.io/finlit-widget';
+
     // Add CSS with error checking
     var styles = document.createElement('link');
     styles.rel = 'stylesheet';
-    styles.href = window.location.origin + '/finlit-widget/static/css/main.479e324a.css';
+    styles.href = baseUrl + '/static/css/main.479e324a.css';
     styles.onload = function() {
         console.log('CSS loaded successfully');
     };
@@ -32,7 +35,7 @@
 
     // Add React with error checking
     var script = document.createElement('script');
-    script.src = window.location.origin + '/finlit-widget/static/js/main.c40c8448.js';
+    script.src = baseUrl + '/static/js/main.c40c8448.js';
     script.async = true;
     script.onload = function() {
         console.log('React script loaded successfully');
