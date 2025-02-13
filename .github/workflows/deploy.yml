@@ -37,8 +37,16 @@ jobs:
         run: |
           echo "Checking build directory structure..."
           ls -R build/
+          echo "Checking CSS file..."
+          ls build/static/css/main.*.css
+          echo "Checking JS file..."
+          ls build/static/js/main.*.js
           echo "Checking for SVG files..."
           find build/ -name "*.svg"
+          
+          # Verify file permissions
+          echo "Setting permissions..."
+          chmod -R 755 build/static
 
       - name: Prepare deployment
         run: |
