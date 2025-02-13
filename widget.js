@@ -52,6 +52,6 @@
     document.head.appendChild(font);
 
     // Add version info for debugging
-    console.log('Finlit Widget version: 1.0.0');
+    console.log('Finlit Widget version: 2.0.0');
     console.log('Finlit Widget setup complete');
 })();
