@@ -34,11 +34,15 @@ jobs:
 
       - name: Copy widget files
         run: |
-          mkdir -p build/static/css build/static/js
-          cp build/static/css/main.*.css build/static/css/
-          cp build/static/js/main.*.js build/static/js/
+          # Copy widget.js and test.html to build folder
           cp widget.js build/
           cp test.html build/
+          
+          # Update the file paths in widget.js to use the correct hashes
+          CSS_HASH=$(ls build/static/css/main.*.css | sed 's/.*main\.\(.*\)\.css/\1/')
+          JS_HASH=$(ls build/static/js/main.*.js | sed 's/.*main\.\(.*\)\.js/\1/')
+          sed -i "s/main\..*\.css/main.$CSS_HASH.css/" build/widget.js
+          sed -i "s/main\..*\.js/main.$JS_HASH.js/" build/widget.js
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
