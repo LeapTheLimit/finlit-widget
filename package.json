@@ -87,8 +87,10 @@
   "rules": {
   
     
+    
   "react-hooks/exhaustive-deps": "warn"
   
+    
   }
   
   },
@@ -152,6 +154,9 @@
   
     
   "eslint-plugin-react-hooks": "^4.6.2",
+  
+    
+  "gh-pages": "^6.3.0",
   
     
   "postcss": "^8.4.47",
