@@ -16,61 +16,17 @@
     widget.style.zIndex = '999999';
     document.body.appendChild(widget);
 
-    // Function to load resources with retries
-    function loadResource(type, url, maxRetries = 3) {
-        let retries = 0;
-        
-        function tryLoad() {
-            return new Promise((resolve, reject) => {
-                const element = type === 'css' 
-                    ? document.createElement('link')
-                    : document.createElement('script');
+    // Add CSS
+    var styles = document.createElement('link');
+    styles.rel = 'stylesheet';
+    styles.href = 'https://leapthelimit.github.io/finlit-widget/static/css/main.45aa36f4.css';
+    document.head.appendChild(styles);
 
-                if (type === 'css') {
-                    element.rel = 'stylesheet';
-                    element.href = url;
-                } else {
-                    element.src = url;
-                    element.async = true;
-                }
-
-                element.onload = () => resolve(element);
-                element.onerror = (e) => {
-                    console.error(`Failed to load ${type} (attempt ${retries + 1}):`, url);
-                    if (retries < maxRetries) {
-                        retries++;
-                        setTimeout(tryLoad, 1000 * retries); // Exponential backoff
-                    } else {
-                        reject(e);
-                    }
-                };
-
-                if (type === 'css') {
-                    document.head.appendChild(element);
-                } else {
-                    document.body.appendChild(element);
-                }
-            });
-        }
-
-        return tryLoad();
-    }
-
-    // Load CSS and JS with proper error handling
-    Promise.all([
-        loadResource('css', 'https://leapthelimit.github.io/finlit-widget/static/css/main.45aa36f4.css'),
-        loadResource('js', 'https://leapthelimit.github.io/finlit-widget/static/js/main.d51a8117.js')
-    ]).then(() => {
-        console.log('All resources loaded successfully');
-    }).catch(error => {
-        console.error('Failed to load some resources:', error);
-    });
-
-    // Add font
-    var font = document.createElement('link');
-    font.rel = 'stylesheet';
-    font.href = 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap';
-    document.head.appendChild(font);
+    // Add React
+    var script = document.createElement('script');
+    script.src = 'https://leapthelimit.github.io/finlit-widget/static/js/main.96ea37cd.js';
+    script.async = true;
+    document.body.appendChild(script);
 
     // Add close button
     var closeButton = document.createElement('button');
@@ -88,6 +44,12 @@
         widget.style.display = 'none';
     };
     widget.appendChild(closeButton);
+
+    // Add font
+    var font = document.createElement('link');
+    font.rel = 'stylesheet';
+    font.href = 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap';
+    document.head.appendChild(font);
 
     // Add version info for debugging
     console.log('Finlit Widget version: 1.0.0');
