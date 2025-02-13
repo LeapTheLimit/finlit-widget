@@ -15,42 +15,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
-          cache: 'npm'
 
       - name: Install dependencies
-        run: |
-          npm ci
-          npm install -g react-scripts
-          sudo chmod -R 777 node_modules/
+        run: npm install
 
-      - name: Build project
-        run: |
-          export NODE_OPTIONS=--openssl-legacy-provider
-          CI=false npm run build
+      - name: Build
+        run: npm run build
 
-      - name: Copy widget files
+      - name: Prepare deployment
         run: |
-          # Copy widget.js and test.html to build folder
           cp widget.js build/
           cp test.html build/
-          
-          # Create media directory and copy SVGs
-          mkdir -p build/static/media
-          cp -r build/static/media/*.svg build/static/media/ || true
-          
-          # Update the file paths in widget.js to use the correct hashes
-          CSS_HASH=$(ls build/static/css/main.*.css | sed 's/.*main\.\(.*\)\.css/\1/')
-          JS_HASH=$(ls build/static/js/main.*.js | sed 's/.*main\.\(.*\)\.js/\1/')
-          sed -i "s/main\..*\.css/main.$CSS_HASH.css/" build/widget.js
-          sed -i "s/main\..*\.js/main.$JS_HASH.js/" build/widget.js
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: build
           branch: gh-pages
+          folder: build
           clean: true 
