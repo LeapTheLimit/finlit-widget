@@ -38,6 +38,10 @@ jobs:
           cp widget.js build/
           cp test.html build/
           
+          # Create media directory and copy SVGs
+          mkdir -p build/static/media
+          cp -r build/static/media/*.svg build/static/media/ || true
+          
           # Update the file paths in widget.js to use the correct hashes
           CSS_HASH=$(ls build/static/css/main.*.css | sed 's/.*main\.\(.*\)\.css/\1/')
           JS_HASH=$(ls build/static/js/main.*.js | sed 's/.*main\.\(.*\)\.js/\1/')
