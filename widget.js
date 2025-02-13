@@ -16,33 +16,55 @@
     widget.style.zIndex = '999999';
     document.body.appendChild(widget);
 
-    // Add latest CSS with better error handling
-    var styles = document.createElement('link');
-    styles.rel = 'stylesheet';
-    styles.href = 'https://leapthelimit.github.io/finlit-widget/static/css/main.45aa36f4.css';
-    styles.onload = function() {
-        console.log('Finlit CSS loaded successfully');
-    };
-    styles.onerror = function(e) {
-        console.error('Failed to load Finlit CSS:', e);
-        console.log('Attempted to load:', styles.href);
-        styles.href = './static/css/main.45aa36f4.css';
-    };
-    document.head.appendChild(styles);
+    // Function to load resources with retries
+    function loadResource(type, url, maxRetries = 3) {
+        let retries = 0;
+        
+        function tryLoad() {
+            return new Promise((resolve, reject) => {
+                const element = type === 'css' 
+                    ? document.createElement('link')
+                    : document.createElement('script');
 
-    // Add latest React bundle with better error handling
-    var script = document.createElement('script');
-    script.src = 'https://leapthelimit.github.io/finlit-widget/static/js/main.d51a8117.js';
-    script.async = true;
-    script.onload = function() {
-        console.log('Finlit React bundle loaded successfully');
-    };
-    script.onerror = function(e) {
-        console.error('Failed to load Finlit React bundle:', e);
-        console.log('Attempted to load:', script.src);
-        script.src = './static/js/main.d51a8117.js';
-    };
-    document.body.appendChild(script);
+                if (type === 'css') {
+                    element.rel = 'stylesheet';
+                    element.href = url;
+                } else {
+                    element.src = url;
+                    element.async = true;
+                }
+
+                element.onload = () => resolve(element);
+                element.onerror = (e) => {
+                    console.error(`Failed to load ${type} (attempt ${retries + 1}):`, url);
+                    if (retries < maxRetries) {
+                        retries++;
+                        setTimeout(tryLoad, 1000 * retries); // Exponential backoff
+                    } else {
+                        reject(e);
+                    }
+                };
+
+                if (type === 'css') {
+                    document.head.appendChild(element);
+                } else {
+                    document.body.appendChild(element);
+                }
+            });
+        }
+
+        return tryLoad();
+    }
+
+    // Load CSS and JS with proper error handling
+    Promise.all([
+        loadResource('css', 'https://leapthelimit.github.io/finlit-widget/static/css/main.45aa36f4.css'),
+        loadResource('js', 'https://leapthelimit.github.io/finlit-widget/static/js/main.d51a8117.js')
+    ]).then(() => {
+        console.log('All resources loaded successfully');
+    }).catch(error => {
+        console.error('Failed to load some resources:', error);
+    });
 
     // Add font
     var font = document.createElement('link');
