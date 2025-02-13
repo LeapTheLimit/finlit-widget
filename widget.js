@@ -26,6 +26,7 @@
     styles.onerror = function(e) {
         console.error('Failed to load Finlit CSS:', e);
         console.log('Attempted to load:', styles.href);
+        styles.href = './static/css/main.7d7d21e3.css';
     };
     document.head.appendChild(styles);
 
@@ -39,6 +40,7 @@
     script.onerror = function(e) {
         console.error('Failed to load Finlit React bundle:', e);
         console.log('Attempted to load:', script.src);
+        script.src = './static/js/main.96ea37cd.js';
     };
     document.body.appendChild(script);
 

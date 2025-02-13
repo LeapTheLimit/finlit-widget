@@ -34,6 +34,9 @@ jobs:
 
       - name: Copy widget files
         run: |
+          mkdir -p build/static/css build/static/js
+          cp build/static/css/main.*.css build/static/css/
+          cp build/static/js/main.*.js build/static/js/
           cp widget.js build/
           cp test.html build/
 
