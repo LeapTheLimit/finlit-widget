@@ -25,8 +25,8 @@
     styles.onload = function() {
         console.log('CSS loaded successfully');
     };
-    styles.onerror = function() {
-        console.error('CSS failed to load');
+    styles.onerror = function(e) {
+        console.error('CSS failed to load:', e);
     };
     document.head.appendChild(styles);
 
@@ -37,10 +37,16 @@
     script.onload = function() {
         console.log('React script loaded successfully');
     };
-    script.onerror = function() {
-        console.error('React script failed to load');
+    script.onerror = function(e) {
+        console.error('React script failed to load:', e);
     };
     document.body.appendChild(script);
+
+    // Add error handling
+    window.onerror = function(msg, url, lineNo, columnNo, error) {
+        console.error('Widget error:', msg, url, lineNo, columnNo, error);
+        return false;
+    };
 
     console.log('Widget script finished initial setup');
 })();
