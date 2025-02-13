@@ -21,10 +21,16 @@ jobs:
           node-version: 18.x
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install -g react-scripts
+          sudo npm install --unsafe-perm
+          sudo chmod -R 777 node_modules/
 
       - name: Build
-        run: npm run build
+        run: |
+          CI=false npm run build
+        env:
+          NODE_OPTIONS: --openssl-legacy-provider
 
       - name: Prepare deployment
         run: |
