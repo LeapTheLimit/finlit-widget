@@ -19,7 +19,7 @@
     // Add latest CSS
     var styles = document.createElement('link');
     styles.rel = 'stylesheet';
-    styles.href = 'https://leapthelimit.github.io/finlit-widget/static/css/main.css'; // Update this with your latest CSS build
+    styles.href = 'https://leapthelimit.github.io/finlit-widget/static/css/main.{new-hash}.css';
     styles.onload = function() {
         console.log('Finlit CSS loaded successfully');
     };
@@ -30,7 +30,7 @@
 
     // Add latest React bundle
     var script = document.createElement('script');
-    script.src = 'https://leapthelimit.github.io/finlit-widget/static/js/main.js'; // Update this with your latest JS build
+    script.src = 'https://leapthelimit.github.io/finlit-widget/static/js/main.{new-hash}.js';
     script.async = true;
     script.onload = function() {
         console.log('Finlit React bundle loaded successfully');
