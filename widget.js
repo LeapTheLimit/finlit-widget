@@ -19,12 +19,12 @@
     // Add CSS with public URL
     var styles = document.createElement('link');
     styles.rel = 'stylesheet';
-    styles.href = 'https://leapthelimit.github.io/finlit-widget/static/css/main.45aa36f4.css';
+    styles.href = 'https://leapthelimit.github.io/finlit-widget/static/css/main.479e324a.css';
     document.head.appendChild(styles);
 
     // Add React with public URL
     var script = document.createElement('script');
-    script.src = 'https://leapthelimit.github.io/finlit-widget/static/js/main.96ea37cd.js';
+    script.src = 'https://leapthelimit.github.io/finlit-widget/static/js/main.c40c8448.js';
     script.async = true;
     document.body.appendChild(script);
 
