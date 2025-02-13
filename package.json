@@ -52,7 +52,7 @@
   "start": "react-scripts start",
   
     
-  "build": "react-scripts build && cp widget.js build/ && cp widget.js build/widget.js",
+  "build": "react-scripts build && cp widget.js build/ && cp -r src/assets/images/* build/static/media/",
   
     
   "test": "react-scripts test",
