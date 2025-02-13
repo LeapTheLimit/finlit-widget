@@ -24,7 +24,7 @@
     // Add CSS with error checking
     var styles = document.createElement('link');
     styles.rel = 'stylesheet';
-    styles.href = baseUrl + '/static/css/main.479e324a.css';
+    styles.href = baseUrl + 'build/static/css/main.479e324a.css';
     styles.onload = function() {
         console.log('CSS loaded successfully');
     };
