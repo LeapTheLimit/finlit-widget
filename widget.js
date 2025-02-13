@@ -25,6 +25,7 @@
     var styles = document.createElement('link');
     styles.rel = 'stylesheet';
     styles.href = 'https://leapthelimit.github.io/finlit-widget/static/css/main.479e324a.css';
+<<<<<<< HEAD
     styles.onload = function() {
         logResourceStatus('CSS', styles.href, true);
     };
@@ -33,11 +34,13 @@
         // Try fallback
         styles.href = './static/css/main.479e324a.css';
     };
+=======
+>>>>>>> 5664511e8daa4affee5e966e01daecd97235f603
     document.head.appendChild(styles);
 
     // Add React bundle
     var script = document.createElement('script');
-    script.src = 'https://leapthelimit.github.io/finlit-widget/static/js/main.96ea37cd.js';
+    script.src = 'https://leapthelimit.github.io/finlit-widget/static/js/main.c40c8448.js';
     script.async = true;
     script.onload = function() {
         logResourceStatus('React bundle', script.src, true);
@@ -72,6 +75,11 @@
     font.href = 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap';
     document.head.appendChild(font);
 
+<<<<<<< HEAD
     console.log('Finlit Widget version: 1.0.0');
+=======
+    // Add version info for debugging
+    console.log('Finlit Widget version: 2.0.0');
+>>>>>>> 5664511e8daa4affee5e966e01daecd97235f603
     console.log('Finlit Widget setup complete');
 })();
