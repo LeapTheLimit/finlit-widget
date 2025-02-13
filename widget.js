@@ -1,46 +1,67 @@
 (function() {
-    console.log('Widget script starting...');
+    console.log('Finlit Widget initializing...');
 
-    // First create container
+    // Create container with updated styling
     var widget = document.createElement('div');
     widget.id = 'root';
     widget.style.position = 'fixed';
-    widget.style.bottom = '40px';
+    widget.style.bottom = '20px';
     widget.style.right = '20px';
-    widget.style.width = '300px';
-    widget.style.height = '528px';  // 480px + 10%
-    widget.style.backgroundColor = '#f0f0f0'; // Light gray background to see if it's there
-    widget.style.border = '2px solid black';  // Border to make it visible
-    widget.style.zIndex = '9999';
+    widget.style.width = '360px'; // Updated width
+    widget.style.height = '600px'; // Updated height
+    widget.style.backgroundColor = 'black'; // Updated background color
     widget.style.borderRadius = '16px';
     widget.style.overflow = 'hidden';
     widget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+    widget.style.zIndex = '999999';
     document.body.appendChild(widget);
-    console.log('Container created');
 
-    // Add CSS with error checking
+    // Add latest CSS
     var styles = document.createElement('link');
     styles.rel = 'stylesheet';
-    styles.href = 'https://leapthelimit.github.io/finlit-widget/static/css/main.8da595db.css';
+    styles.href = 'https://leapthelimit.github.io/finlit-widget/static/css/main.css'; // Update this with your latest CSS build
     styles.onload = function() {
-        console.log('CSS loaded successfully');
+        console.log('Finlit CSS loaded successfully');
     };
     styles.onerror = function() {
-        console.error('CSS failed to load');
+        console.error('Failed to load Finlit CSS');
     };
     document.head.appendChild(styles);
 
-    // Add React with error checking
+    // Add latest React bundle
     var script = document.createElement('script');
-    script.src = 'https://leapthelimit.github.io/finlit-widget/static/js/main.07479a87.js';
+    script.src = 'https://leapthelimit.github.io/finlit-widget/static/js/main.js'; // Update this with your latest JS build
     script.async = true;
     script.onload = function() {
-        console.log('React script loaded successfully');
+        console.log('Finlit React bundle loaded successfully');
     };
     script.onerror = function() {
-        console.error('React script failed to load');
+        console.error('Failed to load Finlit React bundle');
     };
     document.body.appendChild(script);
 
-    console.log('Widget script finished initial setup');
+    // Add font if needed
+    var font = document.createElement('link');
+    font.rel = 'stylesheet';
+    font.href = 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap';
+    document.head.appendChild(font);
+
+    // Add close button
+    var closeButton = document.createElement('button');
+    closeButton.style.position = 'absolute';
+    closeButton.style.top = '10px';
+    closeButton.style.right = '10px';
+    closeButton.style.background = 'transparent';
+    closeButton.style.border = 'none';
+    closeButton.style.color = 'white';
+    closeButton.style.fontSize = '20px';
+    closeButton.style.cursor = 'pointer';
+    closeButton.style.zIndex = '1000000';
+    closeButton.innerHTML = '×';
+    closeButton.onclick = function() {
+        widget.style.display = 'none';
+    };
+    widget.appendChild(closeButton);
+
+    console.log('Finlit Widget setup complete');
 })();
