@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm install -g react-scripts
-          sudo npm install --unsafe-perm
+          npm ci
           sudo chmod -R 777 node_modules/
 
       - name: Build
@@ -31,11 +31,22 @@ jobs:
           CI=false npm run build
         env:
           NODE_OPTIONS: --openssl-legacy-provider
+          PUBLIC_URL: https://leapthelimit.github.io/finlit-widget
+
+      - name: Verify build assets
+        run: |
+          echo "Checking build directory structure..."
+          ls -R build/
+          echo "Checking for SVG files..."
+          find build/ -name "*.svg"
 
       - name: Prepare deployment
         run: |
           cp widget.js build/
           cp test.html build/
+          # Ensure media directory exists and has correct permissions
+          mkdir -p build/static/media
+          chmod -R 755 build/static/media
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
