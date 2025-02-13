@@ -2,63 +2,34 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
-
-permissions:
-  contents: write
+    branches: [main]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18.x
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+        cache: 'npm'
 
-      - name: Install dependencies
-        run: |
-          npm install -g react-scripts
-          npm ci
-          sudo chmod -R 777 node_modules/
+    - name: Install dependencies
+      run: |
+        npm ci
+        npm install -g react-scripts
+        sudo chmod -R 777 node_modules/
 
-      - name: Build
-        run: |
-          CI=false npm run build
-        env:
-          NODE_OPTIONS: --openssl-legacy-provider
-          PUBLIC_URL: https://leapthelimit.github.io/finlit-widget
+    - name: Build project
+      run: |
+        export NODE_OPTIONS=--openssl-legacy-provider
+        CI=false npm run build
 
-      - name: Verify build assets
-        run: |
-          echo "Checking build directory structure..."
-          ls -R build/
-          echo "Checking CSS file..."
-          ls build/static/css/main.*.css
-          echo "Checking JS file..."
-          ls build/static/js/main.*.js
-          echo "Checking for SVG files..."
-          find build/ -name "*.svg"
-          
-          # Verify file permissions
-          echo "Setting permissions..."
-          chmod -R 755 build/static
-
-      - name: Prepare deployment
-        run: |
-          cp widget.js build/
-          cp test.html build/
-          # Ensure media directory exists and has correct permissions
-          mkdir -p build/static/media
-          chmod -R 755 build/static/media
-
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: build
-          clean: true 
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build 
