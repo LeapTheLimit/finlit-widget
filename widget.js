@@ -19,19 +19,20 @@
     // Add latest CSS with better error handling
     var styles = document.createElement('link');
     styles.rel = 'stylesheet';
-    styles.href = 'https://leapthelimit.github.io/finlit-widget/static/css/main.7d7d21e3.css';
+    styles.href = 'https://leapthelimit.github.io/finlit-widget/static/css/main.45aa36f4.css';
     styles.onload = function() {
         console.log('Finlit CSS loaded successfully');
     };
     styles.onerror = function(e) {
         console.error('Failed to load Finlit CSS:', e);
         console.log('Attempted to load:', styles.href);
+        styles.href = './static/css/main.45aa36f4.css';
     };
     document.head.appendChild(styles);
 
     // Add latest React bundle with better error handling
     var script = document.createElement('script');
-    script.src = 'https://leapthelimit.github.io/finlit-widget/static/js/main.96ea37cd.js';
+    script.src = 'https://leapthelimit.github.io/finlit-widget/static/js/main.d51a8117.js';
     script.async = true;
     script.onload = function() {
         console.log('Finlit React bundle loaded successfully');
@@ -39,6 +40,7 @@
     script.onerror = function(e) {
         console.error('Failed to load Finlit React bundle:', e);
         console.log('Attempted to load:', script.src);
+        script.src = './static/js/main.d51a8117.js';
     };
     document.body.appendChild(script);
 
