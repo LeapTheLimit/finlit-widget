@@ -52,7 +52,7 @@
   "start": "react-scripts start",
   
     
-  "build": "react-scripts build",
+  "build": "react-scripts build && cp widget.js build/",
   
     
   "test": "react-scripts test",
