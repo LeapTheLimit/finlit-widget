@@ -18,6 +18,7 @@
     document.body.appendChild(widget);
     console.log('Container created');
 
+<<<<<<< HEAD
     // Add media preload
     var mediaFiles = [
         'chat.9852bbd49db43ab5ba6c39258c8e5f42.svg',
@@ -38,6 +39,8 @@
         document.head.appendChild(link);
     });
 
+=======
+>>>>>>> f7b53b8d7a043b023e3209e28c2d1f05363d58c6
     // Add CSS with error checking
     var styles = document.createElement('link');
     styles.rel = 'stylesheet';
