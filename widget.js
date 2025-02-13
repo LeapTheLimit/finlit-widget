@@ -16,16 +16,40 @@
     widget.style.zIndex = '999999';
     document.body.appendChild(widget);
 
-    // Add CSS with public URL
+    // Function to log resource loading status
+    function logResourceStatus(type, url, success) {
+        console.log(`${type} ${success ? 'loaded' : 'failed to load'}: ${url}`);
+    }
+
+    // Add CSS with correct hash
     var styles = document.createElement('link');
     styles.rel = 'stylesheet';
     styles.href = 'https://leapthelimit.github.io/finlit-widget/static/css/main.479e324a.css';
+<<<<<<< HEAD
+    styles.onload = function() {
+        logResourceStatus('CSS', styles.href, true);
+    };
+    styles.onerror = function() {
+        logResourceStatus('CSS', styles.href, false);
+        // Try fallback
+        styles.href = './static/css/main.479e324a.css';
+    };
+=======
+>>>>>>> 5664511e8daa4affee5e966e01daecd97235f603
     document.head.appendChild(styles);
 
-    // Add React with public URL
+    // Add React bundle
     var script = document.createElement('script');
     script.src = 'https://leapthelimit.github.io/finlit-widget/static/js/main.c40c8448.js';
     script.async = true;
+    script.onload = function() {
+        logResourceStatus('React bundle', script.src, true);
+    };
+    script.onerror = function() {
+        logResourceStatus('React bundle', script.src, false);
+        // Try fallback
+        script.src = './static/js/main.96ea37cd.js';
+    };
     document.body.appendChild(script);
 
     // Add close button
@@ -51,7 +75,11 @@
     font.href = 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap';
     document.head.appendChild(font);
 
+<<<<<<< HEAD
+    console.log('Finlit Widget version: 1.0.0');
+=======
     // Add version info for debugging
     console.log('Finlit Widget version: 2.0.0');
+>>>>>>> 5664511e8daa4affee5e966e01daecd97235f603
     console.log('Finlit Widget setup complete');
 })();
