@@ -2,34 +2,28 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main  # or master
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18.x
-        cache: 'npm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # Or your Node.js version
 
-    - name: Install dependencies
-      run: |
-        npm ci
-        npm install -g react-scripts
-        sudo chmod -R 777 node_modules/
+      - name: Install dependencies
+        run: npm install  # or yarn install
 
-    - name: Build project
-      run: |
-        export NODE_OPTIONS=--openssl-legacy-provider
-        CI=false npm run build
+      - name: Build
+        run: npm run build  # or yarn build
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build 
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
