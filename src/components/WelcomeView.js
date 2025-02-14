@@ -15,6 +15,9 @@ const WelcomeView = ({ setCurrentView }) => (
                     Hey there!<br />
                     I'm Finlix!
                 </h1>
+                <p className="text-white text-sm">
+                    Beta
+                </p>
             </div>
             
             <div className="flex-1 flex items-center justify-center">

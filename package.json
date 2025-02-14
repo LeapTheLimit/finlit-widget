@@ -41,8 +41,7 @@
   "tailwind-scrollbar": "^3.1.0",
   
     
-  "web-vitals": "^2.1.4",
-  "typescript": "4.9.5"
+  "web-vitals": "^2.1.4"
   
   },
   
@@ -60,6 +59,7 @@
     
   "eject": "react-scripts eject",
   
+    
   "predeploy": "npm run build",
   
     
@@ -157,18 +157,7 @@
   "postcss": "^8.4.47",
   
     
-  "tailwindcss": "^3.4.12",
-  "typescript": "4.9.5"
-  
-  },
-  
-  "overrides": {
-  
-    "eslint-config-react-app": {
-  
-      "eslint-plugin-react": "$eslint-plugin-react"
-  
-    }
+  "tailwindcss": "^3.4.12"
   
   }
 }
