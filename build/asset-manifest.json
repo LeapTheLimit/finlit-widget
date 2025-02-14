@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/finlit-widget/static/css/main.479e324a.css",
-    "main.js": "/finlit-widget/static/js/main.3f31f8e3.js",
+    "main.js": "/finlit-widget/static/js/main.eb98d2ac.js",
     "static/js/453.bc1ee248.chunk.js": "/finlit-widget/static/js/453.bc1ee248.chunk.js",
     "static/media/mic.svg": "/finlit-widget/static/media/mic.cc6bbaec2dbe3cac78dcaca5160d0a7a.svg",
     "static/media/game.svg": "/finlit-widget/static/media/game.64a20cb10b927a4036c3baaed638c130.svg",
@@ -13,11 +13,11 @@
     "static/media/Closed.svg": "/finlit-widget/static/media/Closed.0a7e1bfe83eb8fcad1b4ab33ff35a996.svg",
     "static/media/start.svg": "/finlit-widget/static/media/start.ac15180422b613275ca6853eb504839a.svg",
     "main.479e324a.css.map": "/finlit-widget/static/css/main.479e324a.css.map",
-    "main.3f31f8e3.js.map": "/finlit-widget/static/js/main.3f31f8e3.js.map",
+    "main.eb98d2ac.js.map": "/finlit-widget/static/js/main.eb98d2ac.js.map",
     "453.bc1ee248.chunk.js.map": "/finlit-widget/static/js/453.bc1ee248.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.479e324a.css",
-    "static/js/main.3f31f8e3.js"
+    "static/js/main.eb98d2ac.js"
   ]
 }
