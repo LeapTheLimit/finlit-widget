@@ -7,7 +7,7 @@
     // Load required styles
     const styles = document.createElement('link');
     styles.rel = 'stylesheet';
-    styles.href = '/finlit-widget/static/css/main.479e324a.css';
+    styles.href = './css/main.479e324a.css';
     document.head.appendChild(styles);
 
     // Load required fonts
@@ -18,7 +18,7 @@
 
     // Load widget script
     const script = document.createElement('script');
-    script.src = '/finlit-widget/static/js/main.3f31f8e3.js';
+    script.src = './js/main.3f31f8e3.js';
     script.async = true;
     document.body.appendChild(script);
 })();
