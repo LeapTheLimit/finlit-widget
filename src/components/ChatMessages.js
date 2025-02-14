@@ -3,7 +3,6 @@ import startIcon from '../assets/images/start.svg';
 import { ArrowUp, Mic } from 'lucide-react';
 import PoweredBy from './PoweredBy';
 import Header from './Header';  // Importing the Header component
-import PromptSuggestions from './PromptSuggestions';  // Correct import statement
 
 const ChatMessages = ({ pastConversation = [], setCurrentView, isHistory = false }) => {
     const [messages, setMessages] = useState(pastConversation || []);  // Initialize with pastConversation if provided
