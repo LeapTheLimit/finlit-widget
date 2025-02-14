@@ -18,28 +18,20 @@
     document.body.appendChild(widget);
     console.log('Container created');
 
-    // Add CSS with error checking
-    var styles = document.createElement('link');
+    // Load required styles with error checking
+    const styles = document.createElement('link');
     styles.rel = 'stylesheet';
     styles.href = 'https://leapthelimit.github.io/finlit-widget/static/css/main.479e324a.css';
-    styles.onload = function() {
-        console.log('CSS loaded successfully');
-    };
-    styles.onerror = function() {
-        console.error('CSS failed to load');
-    };
+    styles.onload = () => console.log('CSS loaded successfully');
+    styles.onerror = () => console.error('CSS failed to load');
     document.head.appendChild(styles);
 
-    // Add React with error checking
-    var script = document.createElement('script');
+    // Load required scripts with error checking
+    const script = document.createElement('script');
     script.src = 'https://leapthelimit.github.io/finlit-widget/static/js/main.3f31f8e3.js';
     script.async = true;
-    script.onload = function() {
-        console.log('React script loaded successfully');
-    };
-    script.onerror = function() {
-        console.error('React script failed to load');
-    };
+    script.onload = () => console.log('React script loaded successfully');
+    script.onerror = () => console.error('React script failed to load');
     document.body.appendChild(script);
 
     console.log('Widget script finished initial setup');
