@@ -28,7 +28,7 @@
 
     // Load required scripts with error checking
     const script = document.createElement('script');
-    script.src = 'https://leapthelimit.github.io/finlit-widget/static/js/main.3f31f8e3.js';
+    script.src = 'https://leapthelimit.github.io/finlit-widget/static/js/main.c4f2115a.js';
     script.async = true;
     script.onload = () => console.log('React script loaded successfully');
     script.onerror = () => console.error('React script failed to load');
