@@ -19,12 +19,20 @@
     // Load required styles
     const styles = document.createElement('link');
     styles.rel = 'stylesheet';
+<<<<<<< HEAD
     styles.href = './css/main.479e324a.css'; // Updated path
+=======
+    styles.href = '/finlit-widget/static/css/main.479e324a.css'; // Updated path
+>>>>>>> 1266a530d4f1f4b9388b7d17c34ea5c57988a8b6
     
     styles.onload = () => {
         console.log('CSS loaded successfully.');
         // Load required scripts
+<<<<<<< HEAD
         loadScript('./js/main.3f31f8e3.js'); // Updated path
+=======
+        loadScript('/finlit-widget/static/js/main.3f31f8e3.js'); // Updated path
+>>>>>>> 1266a530d4f1f4b9388b7d17c34ea5c57988a8b6
     };
 
     styles.onerror = () => {
