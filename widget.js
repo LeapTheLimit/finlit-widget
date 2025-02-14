@@ -19,12 +19,12 @@
     // Load required styles
     const styles = document.createElement('link');
     styles.rel = 'stylesheet';
-    styles.href = 'https://cors-anywhere.herokuapp.com/https://leapthelimit.github.io/finlit-widget/static/css/main.479e324a.css';
+    styles.href = '/finlit-widget/static/css/main.479e324a.css';
     
     styles.onload = () => {
         console.log('CSS loaded successfully.');
         // Load required scripts
-        loadScript('https://cors-anywhere.herokuapp.com/https://leapthelimit.github.io/finlit-widget/static/js/main.3f31f8e3.js');
+        loadScript('/finlit-widget/static/js/main.3f31f8e3.js');
     };
 
     styles.onerror = () => {
