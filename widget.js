@@ -1,9 +1,9 @@
 (function() {
     console.log('Widget script starting...');
 
-    // First create container
+    // Create widget container
     var widget = document.createElement('div');
-    widget.id = 'root';
+    widget.id = 'finlit-widget-container';
     widget.style.position = 'fixed';
     widget.style.bottom = '40px';
     widget.style.right = '20px';

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { AudioLines, Globe, MicIcon } from 'lucide-react';
+import { AudioLines, Globe, MicIcon, Users } from 'lucide-react';
 import Header from './Header';
 import micBg from '../assets/images/circleDiv.svg';
 import FoxAvatar from './FoxAvatar';
@@ -88,8 +88,8 @@ const VoiceChat = ({ setCurrentView }) => {
         setShowLanguages(!showLanguages);
     };
 
-    const getLanguageCode = useCallback((language) => {
-        switch(language) {
+    const getLanguageCode = () => {
+        switch(selectedLanguage) {
             case 'עב':
                 return 'he-IL';
             case 'عر':
@@ -98,7 +98,7 @@ const VoiceChat = ({ setCurrentView }) => {
             default:
                 return 'en-US';
         }
-    }, []);
+    };
 
     const handleUserMessage = useCallback(async (message) => {
         try {
@@ -107,7 +107,7 @@ const VoiceChat = ({ setCurrentView }) => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
                     message, 
-                    language: getLanguageCode(selectedLanguage)
+                    language: getLanguageCode()
                 })
             });
             const chatData = await chatResponse.json();
@@ -147,7 +147,7 @@ const VoiceChat = ({ setCurrentView }) => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
                     text: botReply, 
-                    language_code: getLanguageCode(selectedLanguage),
+                    language_code: getLanguageCode(),
                     voice_name: getVoiceForAvatar(),
                     speaking_rate: currentAvatar === 'robot' ? 0.9 : 1.0,
                     pitch: currentAvatar === 'robot' ? 0.5 : 
@@ -182,7 +182,7 @@ const VoiceChat = ({ setCurrentView }) => {
             setSpeaking(false);
             setAudioPlaying(false);
         }
-    }, [getLanguageCode, serverUrl, currentAvatar, selectedLanguage]);
+    }, [getLanguageCode, serverUrl, currentAvatar]);
 
     useEffect(() => {
         if (responseWords.length > 0 && currentWordIndex < responseWords.length) {
