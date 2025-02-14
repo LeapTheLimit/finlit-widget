@@ -21,7 +21,7 @@
     // Add CSS with error checking
     var styles = document.createElement('link');
     styles.rel = 'stylesheet';
-    styles.href = 'https://leapthelimit.github.io/finlit-widget/static/css/main.8da595db.css';
+    styles.href = 'https://leapthelimit.github.io/finlit-widget/static/css/main.479e324a.css';
     styles.onload = function() {
         console.log('CSS loaded successfully');
     };
@@ -32,7 +32,7 @@
 
     // Add React with error checking
     var script = document.createElement('script');
-    script.src = 'https://leapthelimit.github.io/finlit-widget/static/js/main.07479a87.js';
+    script.src = 'https://leapthelimit.github.io/finlit-widget/static/js/main.3f31f8e3.js';
     script.async = true;
     script.onload = function() {
         console.log('React script loaded successfully');
